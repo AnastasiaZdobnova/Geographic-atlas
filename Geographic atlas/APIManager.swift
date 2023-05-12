@@ -8,36 +8,36 @@
 
 import Foundation
 
-class APIManager{
+class APIManager {
+    
     static let shared = APIManager()
     let urlString = "https://restcountries.com/v3.1/all"
+    var completionHandler: (() -> Void)?
     
-    func getData(){
+    func getData() {
         let url = URL(string: urlString)
         var request = URLRequest(url: url!)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data else {return}
-            if let contryData = try? JSONDecoder().decode(CountryData.self, from: data){
+            guard let data = data else { return }
+            if let countryData = try? JSONDecoder().decode(CountryData.self, from: data) {
                 print("Success decoding")
-                for country in contryData {
-                      let region = country.region
-                      print(region)
-                }
-                print("уникальные регионы")
-                var uniqueRegions = Set<String>()
-
-                for country in contryData {
+                
+                for country in countryData {
                     let region = country.region
-                    uniqueRegions.insert(region)
+                    if !DataManager.uniqueRegions.contains(region) {
+                        DataManager.uniqueRegions.append(region)
+                    }
                 }
-
-                for region in uniqueRegions {
-                    print(region)
+                
+                DispatchQueue.main.async {
+                    self.completionHandler?()
                 }
-            } else{
-                print("Fail decofing")
+            } else {
+                print("Fail decoding")
             }
-        }.resume()
+        }
+        
+        task.resume()
     }
 }
