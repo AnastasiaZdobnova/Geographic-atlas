@@ -9,17 +9,19 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
         title = "World countries"
         
         
-        var tableView = UITableView(frame: view.bounds, style: .plain)
+        tableView = UITableView(frame: view.bounds, style: .plain)
         
         APIManager.shared.completionHandler = { [weak self] in
             self?.printUnique()
-            tableView.reloadData()
+            self?.tableView.reloadData()
         }
         
         APIManager.shared.getData()
@@ -59,20 +61,28 @@ extension ViewController: UITableViewDelegate{
 extension ViewController: UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-            print("Вот сколько у меня секций\(DataManager.uniqueRegions.count)")
-            return DataManager.uniqueRegions.count
-            
+        print("Вот сколько у меня секций\(DataManager.uniqueRegions.count)")
+        return DataManager.uniqueRegions.count
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        let region = DataManager.uniqueRegions[section]
+        print("Вот такой у меня region - \(region)")
+        let countries = DataManager.shared.getCountriesInRegion(region)
+        print("Вот столько у меня должно быть ячеек - \(countries.count)")
+        return countries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let region = DataManager.uniqueRegions[indexPath.section]
-        cell.textLabel?.text = "Region: \(region), Row: \(indexPath.row)"
-        return cell
+            
+            let region = DataManager.uniqueRegions[indexPath.section]
+            let countries = DataManager.shared.getCountriesInRegion(region)
+            let countryName = countries[indexPath.row]
+            cell.textLabel?.text = countryName
+            
+            return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

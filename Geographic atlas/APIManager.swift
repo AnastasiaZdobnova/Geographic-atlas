@@ -9,10 +9,11 @@
 import Foundation
 
 class APIManager {
-    
     static let shared = APIManager()
     let urlString = "https://restcountries.com/v3.1/all"
     var completionHandler: (() -> Void)?
+    
+    var countryData: [CountryDatum] = [] // Добавленное свойство для хранения данных стран
     
     func getData() {
         let url = URL(string: urlString)
@@ -20,8 +21,10 @@ class APIManager {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else { return }
-            if let countryData = try? JSONDecoder().decode(CountryData.self, from: data) {
+            if let countryData = try? JSONDecoder().decode([CountryDatum].self, from: data) {
                 print("Success decoding")
+                
+                self.countryData = countryData // Сохраняем данные стран в свойство countryData
                 
                 for country in countryData {
                     let region = country.region
@@ -41,3 +44,4 @@ class APIManager {
         task.resume()
     }
 }
+
