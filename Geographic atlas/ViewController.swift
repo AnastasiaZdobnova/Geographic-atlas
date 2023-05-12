@@ -14,13 +14,16 @@ class ViewController: UIViewController {
         view.backgroundColor = .systemGray6
         title = "World countries"
         
+        
+        var tableView = UITableView(frame: view.bounds, style: .plain)
+        
         APIManager.shared.completionHandler = { [weak self] in
             self?.printUnique()
+            tableView.reloadData()
         }
         
         APIManager.shared.getData()
         
-        var tableView = UITableView(frame: view.bounds, style: .plain)
         // Добавление UITableView в иерархию представлений
         view.addSubview(tableView)
         
@@ -38,6 +41,8 @@ class ViewController: UIViewController {
                 print(region)
             }
         }
+        //tableView.reloadData()
+        
     }
 }
 
@@ -45,7 +50,9 @@ class ViewController: UIViewController {
 
 //MARK: - UITableViewDelegate
 extension ViewController: UITableViewDelegate{
-    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40.0 // Задайте желаемую высоту для заголовка секции
+    }
 }
 
 //MARK: - UITableViewDataSource
@@ -58,15 +65,29 @@ extension ViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        cell.textLabel?.text = "Hello"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let region = DataManager.uniqueRegions[indexPath.section]
+        cell.textLabel?.text = "Region: \(region), Row: \(indexPath.row)"
         return cell
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 40.0))
+        headerView.backgroundColor = .lightGray
+        
+        let titleLabel = UILabel(frame: CGRect(x: 16.0, y: 0, width: tableView.bounds.width - 32.0, height: 40.0))
+        titleLabel.textColor = .black
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+        titleLabel.text = DataManager.uniqueRegions[section]
+        
+        headerView.addSubview(titleLabel)
+        
+        return headerView
+    }
     
 }
 
