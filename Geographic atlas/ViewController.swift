@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .white
         title = "World countries"
         
         
@@ -28,13 +28,32 @@ class ViewController: UIViewController {
         
         APIManager.shared.getData()
         
+        
+        layout()
+    }
+    
+    func layout(){
+        
         // Добавление UITableView в иерархию представлений
         view.addSubview(tableView)
-        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         // Настройка делегата и источника данных
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
+        tableView.separatorStyle = .none
+        
+        NSLayoutConstraint.activate([
+        
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 24),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12)
+        
+        
+        ])
+        
+        
     }
     
     func printUnique() {
@@ -55,7 +74,7 @@ class ViewController: UIViewController {
 //MARK: - UITableViewDelegate
 extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40.0 // Задайте желаемую высоту для заголовка секции
+        return 18.0 // Задайте желаемую высоту для заголовка секции
     }
 }
 
@@ -92,22 +111,54 @@ extension ViewController: UITableViewDataSource{
         cell.countryNameLabel.text = country.countryName
         cell.capitalLabel.text = country.capital?.first
         cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
+        //
+        
+        
         return cell
     }
     
+    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    //        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 40.0))
+    //        headerView.backgroundColor = .lightGray
+    //
+    //        let titleLabel = UILabel(frame: CGRect(x: 16.0, y: 0, width: tableView.bounds.width - 32.0, height: 40.0))
+    //        titleLabel.textColor = .black
+    //        titleLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+    //        titleLabel.text = DataManager.uniqueRegions[section]
+    //
+    //        headerView.addSubview(titleLabel)
+    //
+    //        return headerView
+    //    }
+    //
+    //}
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 40.0))
-        headerView.backgroundColor = .lightGray
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
         
-        let titleLabel = UILabel(frame: CGRect(x: 16.0, y: 0, width: tableView.bounds.width - 32.0, height: 40.0))
-        titleLabel.textColor = .black
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
-        titleLabel.text = DataManager.uniqueRegions[section]
+        let titleLabel = UILabel()
+        titleLabel.font = UIFont(name: "SFProText-Bold", size: 15)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        titleLabel.textColor = UIColor(red: 171/255, green: 179/255, blue: 187/255, alpha: 1.0)
+        titleLabel.text = DataManager.uniqueRegions[section].uppercased()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        let attributedText = NSMutableAttributedString(string: DataManager.uniqueRegions[section].uppercased())
+        let letterSpacing: CGFloat = 1.2
+        attributedText.addAttribute(NSAttributedString.Key.kern, value: letterSpacing, range: NSRange(location: 0, length: attributedText.length))
+        titleLabel.attributedText = attributedText
+        
         
         headerView.addSubview(titleLabel)
         
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
+            titleLabel.topAnchor.constraint(equalTo: headerView.topAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16)
+        ])
+        
         return headerView
     }
-    
 }
-

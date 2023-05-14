@@ -12,8 +12,9 @@ class CustomTableViewCell: UITableViewCell {
     
     let flagsImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -22,8 +23,10 @@ class CustomTableViewCell: UITableViewCell {
     
     let contentWhiteView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.98, alpha: 1.0)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 8
         return view
     }()
     
@@ -52,19 +55,23 @@ class CustomTableViewCell: UITableViewCell {
             [contentWhiteView, flagsImageView, countryNameLabel, capitalLabel].forEach {
                 contentView.addSubview($0)
             }
-            
+        
+        
             NSLayoutConstraint.activate([
-                contentWhiteView.topAnchor.constraint(equalTo: contentView.topAnchor),
+                contentWhiteView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
                 contentWhiteView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 contentWhiteView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
                 contentWhiteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                contentWhiteView.heightAnchor.constraint(equalToConstant: 72),
                 
                 flagsImageView.topAnchor.constraint(equalTo: contentWhiteView.topAnchor, constant: 16),
                 flagsImageView.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 16),
                 flagsImageView.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -16),
+                flagsImageView.heightAnchor.constraint(equalToConstant: 48),
+                flagsImageView.widthAnchor.constraint(equalToConstant: 82),
                 
                 countryNameLabel.topAnchor.constraint(equalTo: flagsImageView.topAnchor),
-                countryNameLabel.leadingAnchor.constraint(equalTo: flagsImageView.leadingAnchor, constant: 16),
+                countryNameLabel.leadingAnchor.constraint(equalTo: flagsImageView.trailingAnchor, constant: 16),
                 
                 capitalLabel.leadingAnchor.constraint(equalTo: countryNameLabel.trailingAnchor, constant: 16),
                 capitalLabel.topAnchor.constraint(equalTo: countryNameLabel.topAnchor)
