@@ -9,7 +9,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var CountryFirstInfo = [(countryName: String, cca2: String, capital: [String]?, flags: String)]()
+    var CountryFirstInfo = [(countryName: String, cca2: String, capital: [String]?, flags: String, isExpanded: Bool)]()
+    var selectedIndexes: [IndexPath] = []
+    
     
     var tableView: UITableView!
     
@@ -41,6 +43,7 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
+        tableView.register(CustomExpandedTableViewCell.self, forCellReuseIdentifier: "CustomExpandedTableViewCell")
         tableView.separatorStyle = .none
         
         NSLayoutConstraint.activate([
@@ -96,25 +99,34 @@ extension ViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
+        if selectedIndexes.contains(indexPath) {
+            // Ячейка раскрыта, возвращаем CustomExpandedTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomExpandedTableViewCell", for: indexPath) as! CustomExpandedTableViewCell
+            
+            let region = DataManager.uniqueRegions[indexPath.section]
+            let countries = DataManager.shared.getCountriesInRegion(region)
+            let country = countries[indexPath.row]
+            
+            cell.countryNameLabel.text = country.countryName
+            cell.capitalLabel.text = country.capital?.first
+            cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
+            
+            return cell
+        } else {
+            // Ячейка закрыта, возвращаем CustomTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
+            
+            let region = DataManager.uniqueRegions[indexPath.section]
+            let countries = DataManager.shared.getCountriesInRegion(region)
+            let country = countries[indexPath.row]
+            
+            cell.countryNameLabel.text = country.countryName
+            cell.capitalLabel.text = country.capital?.first
+            cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
+            
+            return cell
+        }
         
-        let region = DataManager.uniqueRegions[indexPath.section]
-        
-        
-        
-        let countries = DataManager.shared.getCountriesInRegion(region)
-        
-        let country = countries[indexPath.row]
-        
-        CountryFirstInfo.append(country) //добавляем в список стран
-        
-        cell.countryNameLabel.text = country.countryName
-        cell.capitalLabel.text = country.capital?.first
-        cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
-        //
-        
-        
-        return cell
     }
     
     //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -161,4 +173,18 @@ extension ViewController: UITableViewDataSource{
         
         return headerView
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Хуета")
+        if let index = selectedIndexes.firstIndex(of: indexPath) {
+            // Ячейка уже выбрана, снимаем выбор
+            selectedIndexes.remove(at: index)
+        } else {
+            // Выбрана новая ячейка, добавляем индекс в массив
+            selectedIndexes.append(indexPath)
+        }
+        tableView.reloadData()
+    }
+    
+    
 }

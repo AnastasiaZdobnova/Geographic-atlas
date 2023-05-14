@@ -10,6 +10,8 @@ import UIKit
 
 class CustomTableViewCell: UITableViewCell {
     
+    var isCellOpen: Bool = false
+    
     let flagsImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -30,7 +32,7 @@ class CustomTableViewCell: UITableViewCell {
         return view
     }()
     
-    let countryNameLabel: UILabel = {
+    var countryNameLabel: UILabel = {
         let lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 17)
@@ -58,7 +60,8 @@ class CustomTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
-            
+            selectionStyle = .none
+        
             [contentWhiteView, flagsImageView, countryNameLabel, capitalLabel,chevronDownLabel].forEach {
                 contentView.addSubview($0)
             }
@@ -94,6 +97,10 @@ class CustomTableViewCell: UITableViewCell {
             fatalError("init(coder:) has not been implemented")
         }
     
+        
+      
+    
+
     
 }
 
