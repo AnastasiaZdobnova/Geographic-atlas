@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var CountryFirstInfo = [(countryName: String, cca2: String, capital: [String]?, flag: String)]()
+    var CountryFirstInfo = [(countryName: String, cca2: String, capital: [String]?, flags: String)]()
     
     var tableView: UITableView!
     
@@ -91,7 +91,7 @@ extension ViewController: UITableViewDataSource{
         
         cell.countryNameLabel.text = country.countryName
         cell.capitalLabel.text = country.capital?.first
-        //cell.flagImageView.image = UIImage(named: country.flag)
+        cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
         return cell
     }
     
