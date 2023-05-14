@@ -33,18 +33,25 @@ class CustomTableViewCell: UITableViewCell {
     let countryNameLabel: UILabel = {
         let lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
-        lable.font = .systemFont(ofSize: 20, weight: UIFont.Weight.bold)
+        lable.font = UIFont(name: "SFProText-Bold", size: 17)
         lable.textColor = .black
-        lable.numberOfLines = 2
         return lable
+    }()
+    
+    let chevronDownLabel : UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(systemName: "chevron.down")
+        imageView.tintColor = .black
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
     
     let capitalLabel: UILabel = {
         let lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
-        lable.font = .systemFont(ofSize: 20, weight: UIFont.Weight.bold)
-        lable.textColor = .systemPink
-        lable.numberOfLines = 2
+        lable.font = UIFont(name: "SFProText-Regular", size: 13)
+        lable.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1.0)
         return lable
     }()
     
@@ -52,7 +59,7 @@ class CustomTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             
-            [contentWhiteView, flagsImageView, countryNameLabel, capitalLabel].forEach {
+            [contentWhiteView, flagsImageView, countryNameLabel, capitalLabel,chevronDownLabel].forEach {
                 contentView.addSubview($0)
             }
         
@@ -73,8 +80,12 @@ class CustomTableViewCell: UITableViewCell {
                 countryNameLabel.topAnchor.constraint(equalTo: flagsImageView.topAnchor),
                 countryNameLabel.leadingAnchor.constraint(equalTo: flagsImageView.trailingAnchor, constant: 16),
                 
-                capitalLabel.leadingAnchor.constraint(equalTo: countryNameLabel.trailingAnchor, constant: 16),
-                capitalLabel.topAnchor.constraint(equalTo: countryNameLabel.topAnchor)
+                capitalLabel.leadingAnchor.constraint(equalTo: countryNameLabel.leadingAnchor),
+                capitalLabel.topAnchor.constraint(equalTo: countryNameLabel.bottomAnchor, constant: 4),
+                
+                chevronDownLabel.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: -12),
+                chevronDownLabel.topAnchor.constraint(equalTo: contentWhiteView.topAnchor, constant: 24),
+                chevronDownLabel.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -24)
                 
             ])
         }
