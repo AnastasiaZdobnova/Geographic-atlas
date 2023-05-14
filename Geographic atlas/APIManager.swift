@@ -9,6 +9,7 @@
 import Foundation
 
 class APIManager {
+    
     static let shared = APIManager()
     let urlString = "https://restcountries.com/v3.1/all"
     var completionHandler: (() -> Void)?

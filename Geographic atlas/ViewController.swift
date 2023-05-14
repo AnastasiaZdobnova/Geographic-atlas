@@ -4,10 +4,12 @@
 //
 //  Created by Анастасия Здобнова on 12.05.2023.
 //
-//Какие у меня есть секции  "Europe" "Asia" "Africa" "Oceania" "Americas" "Antarctic"
+//
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var CountryFirstInfo = [(countryName: String, cca2: String, capital: [String]?, flag: String)]()
     
     var tableView: UITableView!
     
@@ -32,7 +34,7 @@ class ViewController: UIViewController {
         // Настройка делегата и источника данных
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
     }
     
     func printUnique() {
@@ -75,14 +77,22 @@ extension ViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            
-            let region = DataManager.uniqueRegions[indexPath.section]
-            let countries = DataManager.shared.getCountriesInRegion(region)
-            let countryName = countries[indexPath.row]
-            cell.textLabel?.text = countryName
-            
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
+        
+        let region = DataManager.uniqueRegions[indexPath.section]
+        
+        
+        
+        let countries = DataManager.shared.getCountriesInRegion(region)
+        
+        let country = countries[indexPath.row]
+        
+        CountryFirstInfo.append(country) //добавляем в список стран
+        
+        cell.countryNameLabel.text = country.countryName
+        cell.capitalLabel.text = country.capital?.first
+        //cell.flagImageView.image = UIImage(named: country.flag)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
