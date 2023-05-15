@@ -42,10 +42,10 @@ class CustomExpandedTableViewCell: UITableViewCell {
         return lable
     }()
     
-    let chevronDownLabel : UIImageView = {
+    let chevronUpLabel : UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "chevron.down")
+        imageView.image = UIImage(systemName: "chevron.up")
         imageView.tintColor = .black
         imageView.contentMode = .scaleAspectFit
         return imageView
@@ -59,13 +59,42 @@ class CustomExpandedTableViewCell: UITableViewCell {
         return lable
     }()
     
+    let populationLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "SFProText-Regular", size: 13)
+        label.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1.0)
+        return label
+    }()
+
+    let areaLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "SFProText-Regular", size: 13)
+        label.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1.0)
+        return label
+    }()
+
+    let currenciesLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "SFProText-Regular", size: 13)
+        label.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1.0)
+        return label
+    }()
+
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
         
-        [contentWhiteView, flagsImageView, countryNameLabel, capitalLabel,chevronDownLabel].forEach {
+        [contentWhiteView, flagsImageView, countryNameLabel, capitalLabel,chevronUpLabel].forEach {
+            contentView.addSubview($0)
+        }
+        
+        [populationLabel, areaLabel, currenciesLabel].forEach {
             contentView.addSubview($0)
         }
         
@@ -75,7 +104,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
             contentWhiteView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             contentWhiteView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             contentWhiteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            contentWhiteView.heightAnchor.constraint(equalToConstant: 150),
+            contentWhiteView.heightAnchor.constraint(equalToConstant: 216),
             
             flagsImageView.topAnchor.constraint(equalTo: contentWhiteView.topAnchor, constant: 16),
             flagsImageView.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 16),
@@ -88,9 +117,18 @@ class CustomExpandedTableViewCell: UITableViewCell {
             capitalLabel.leadingAnchor.constraint(equalTo: countryNameLabel.leadingAnchor),
             capitalLabel.topAnchor.constraint(equalTo: countryNameLabel.bottomAnchor, constant: 4),
             
-            chevronDownLabel.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: -12),
-            chevronDownLabel.topAnchor.constraint(equalTo: contentWhiteView.topAnchor, constant: 24),
+            chevronUpLabel.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: -12),
+            chevronUpLabel.topAnchor.constraint(equalTo: contentWhiteView.topAnchor, constant: 24),
 //            chevronDownLabel.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -24)
+            
+            populationLabel.leadingAnchor.constraint(equalTo: flagsImageView.leadingAnchor),
+            populationLabel.topAnchor.constraint(equalTo: flagsImageView.bottomAnchor, constant: 12),
+            
+            areaLabel.leadingAnchor.constraint(equalTo: populationLabel.leadingAnchor),
+            areaLabel.topAnchor.constraint(equalTo: populationLabel.bottomAnchor, constant: 8),
+            
+            currenciesLabel.leadingAnchor.constraint(equalTo: populationLabel.leadingAnchor),
+            currenciesLabel.topAnchor.constraint(equalTo: areaLabel.bottomAnchor, constant: 8)
             
         ])
     }
