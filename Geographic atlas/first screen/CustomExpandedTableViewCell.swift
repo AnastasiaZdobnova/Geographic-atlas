@@ -13,6 +13,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
     
     var isCellOpen: Bool = false
     
+    weak var navigationController: UINavigationController?
     
     let flagsImageView: UIImageView = {
         let imageView = UIImageView()
@@ -82,6 +83,29 @@ class CustomExpandedTableViewCell: UITableViewCell {
         label.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1.0)
         return label
     }()
+    
+    let learnMoreButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Learn more", for: .normal)
+        button.addTarget(self, action: #selector(learnMoreButtonTapped), for: .touchUpInside)
+        button.setTitleColor(.blue, for: .normal)
+        return button
+    }()
+    
+    @objc func learnMoreButtonTapped() {
+        // Создать экземпляр CountryDetailsViewController и передать необходимые данные
+        let countryDetailsVC = CountryDetailsViewController()
+        // Настройте CountryDetailsViewController с использованием переданных данных
+        countryDetailsVC.title = countryNameLabel.text
+        
+        // Перейти на новый экран
+        // Можете использовать UINavigationController, чтобы добавить кнопку возврата на предыдущий экран
+        navigationController?.pushViewController(countryDetailsVC, animated: true)
+    }
+    
+
+   
 
     
     
@@ -94,7 +118,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
             contentView.addSubview($0)
         }
         
-        [populationLabel, areaLabel, currenciesLabel].forEach {
+        [populationLabel, areaLabel, currenciesLabel, learnMoreButton].forEach {
             contentView.addSubview($0)
         }
         
@@ -128,7 +152,12 @@ class CustomExpandedTableViewCell: UITableViewCell {
             areaLabel.topAnchor.constraint(equalTo: populationLabel.bottomAnchor, constant: 8),
             
             currenciesLabel.leadingAnchor.constraint(equalTo: populationLabel.leadingAnchor),
-            currenciesLabel.topAnchor.constraint(equalTo: areaLabel.bottomAnchor, constant: 8)
+            currenciesLabel.topAnchor.constraint(equalTo: areaLabel.bottomAnchor, constant: 8),
+            
+            learnMoreButton.leadingAnchor.constraint(equalTo: populationLabel.leadingAnchor),
+            learnMoreButton.topAnchor.constraint(equalTo: currenciesLabel.bottomAnchor, constant: 12),
+            learnMoreButton.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: -12),
+            learnMoreButton.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -12)
             
         ])
     }

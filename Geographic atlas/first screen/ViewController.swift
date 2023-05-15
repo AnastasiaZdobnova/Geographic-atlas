@@ -70,6 +70,8 @@ class ViewController: UIViewController {
         //tableView.reloadData()
         
     }
+    
+    
 }
 
 
@@ -101,7 +103,10 @@ extension ViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if selectedIndexes.contains(indexPath) {
             // Ячейка раскрыта, возвращаем CustomExpandedTableViewCell
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "CustomExpandedTableViewCell", for: indexPath) as! CustomExpandedTableViewCell
+            
+            cell.navigationController = navigationController
             
             let region = DataManager.uniqueRegions[indexPath.section]
             let countries = DataManager.shared.getCountriesInRegion(region)
@@ -110,21 +115,15 @@ extension ViewController: UITableViewDataSource{
             cell.countryNameLabel.text = country.countryName
             cell.capitalLabel.text = country.capital?.first
             cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
-//            var population = "Population: "
-//            var area = "Area: "
-//            var currencies = "Currencies"
-            print("Вот сколько у меня данных в ountryData")
-            print((APIManager.shared.countryData.count))
+
             if let countryData = APIManager.shared.countryData.first(where: { $0.cca2 == country.cca2 }) {
                 // Вытащите нужные данные из countryData
-                print("нашли элемент)))))))))))))))))))))")
                 cell.areaLabel.text = "Population: " + String(countryData.area)
                 cell.populationLabel.text = "Area: " + String(countryData.population)
                 cell.currenciesLabel.text = "Currencies: "+"потом доделаем"
             }
-            else{
-                print("НИхуя не нашли(((((((((((((((")
-            }
+            
+            
             
             return cell
         } else {
