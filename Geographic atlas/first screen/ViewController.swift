@@ -118,8 +118,8 @@ extension ViewController: UITableViewDataSource{
 
             if let countryData = APIManager.shared.countryData.first(where: { $0.cca2 == country.cca2 }) {
                 // Вытащите нужные данные из countryData
-                cell.areaLabel.text = "Population: " + String(countryData.area)
-                cell.populationLabel.text = "Area: " + String(countryData.population)
+                cell.areaLabel.text = "Area: " + String(countryData.area)
+                cell.populationLabel.text = "Population: " + String(countryData.population)
                 cell.currenciesLabel.text = "Currencies: "+"потом доделаем"
             }
             

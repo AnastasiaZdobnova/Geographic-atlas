@@ -11,7 +11,6 @@ import UIKit
 
 class CustomExpandedTableViewCell: UITableViewCell {
     
-    var isCellOpen: Bool = false
     
     weak var navigationController: UINavigationController?
     
@@ -98,6 +97,29 @@ class CustomExpandedTableViewCell: UITableViewCell {
         let countryDetailsVC = CountryDetailsViewController()
         // Настройте CountryDetailsViewController с использованием переданных данных
         countryDetailsVC.title = countryNameLabel.text
+
+        if let countryData = APIManager.shared.countryData.first(where: { $0.name.common == countryNameLabel.text }) {
+            // Вытащите нужные данные из countryData
+            countryDetailsVC.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: countryData.flags.png)!))
+            
+            countryDetailsVC.regionNameLabel.text = countryData.region
+            countryDetailsVC.capitalNameLabel.text = countryData.capital?.first
+            if let latlng = countryData.capitalInfo.latlng {
+                let latitude = latlng[0]
+                let longitude = latlng[1]
+                
+                let coordinatesString = String(latitude) + ", " + String(longitude)
+                countryDetailsVC.coordinatesNameLabel.text = coordinatesString
+            } else {
+                countryDetailsVC.coordinatesNameLabel.text = "Нет данных о координатах"
+            }
+            
+            countryDetailsVC.populationNameLabel.text = String(countryData.population)
+            countryDetailsVC.areaNameLabel.text = String(countryData.area)
+            let timezonesString = countryData.timezones.joined(separator: "\n")
+            countryDetailsVC.timezonesNameLabel.text = timezonesString
+            
+        }
         
         // Перейти на новый экран
         // Можете использовать UINavigationController, чтобы добавить кнопку возврата на предыдущий экран
