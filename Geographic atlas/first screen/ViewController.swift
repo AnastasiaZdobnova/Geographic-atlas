@@ -17,9 +17,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .blue
+        let backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1.0)
+        view.backgroundColor = backgroundColor
+        self.navigationController?.navigationBar.backgroundColor = backgroundColor
+
         title = "World countries"
-        
+
         
         tableView = UITableView(frame: view.bounds, style: .plain)
         
@@ -48,10 +52,10 @@ class ViewController: UIViewController {
         
         NSLayoutConstraint.activate([
         
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 24),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12)
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12)
         
         
         ])

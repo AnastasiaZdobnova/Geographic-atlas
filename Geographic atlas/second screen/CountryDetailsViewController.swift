@@ -12,9 +12,11 @@ class CountryDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        
-        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        let backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1.0)
+        view.backgroundColor = backgroundColor
+        self.navigationController?.navigationBar.backgroundColor = backgroundColor
+    
+       
         
         layout()
         // Do any additional setup after loading the view.
@@ -22,30 +24,30 @@ class CountryDetailsViewController: UIViewController {
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
+        scrollView.bounces = true
         return scrollView
     }()
     
     let contentView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemGreen
+//        view.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.98, alpha: 1.0)
+        view.backgroundColor = .yellow
         return view
     }()
     
     var flagsImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.masksToBounds = true
+        imageView.layer.shadowColor = UIColor.black.cgColor
+        
+        
         return imageView
     }()
     
     var regionDot: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
         view.layer.cornerRadius = 5
         return view
@@ -53,7 +55,6 @@ class CountryDetailsViewController: UIViewController {
     
     var regionLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 15)
         lable.textColor = .gray
         lable.text = "Region:"
@@ -63,7 +64,6 @@ class CountryDetailsViewController: UIViewController {
     
     var regionNameLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
         lable.textColor = .black
         return lable
@@ -71,7 +71,6 @@ class CountryDetailsViewController: UIViewController {
     
     var capitalDot: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
         view.layer.cornerRadius = 5
         return view
@@ -79,7 +78,6 @@ class CountryDetailsViewController: UIViewController {
     
     let capitalLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 15)
         lable.textColor = .gray
         lable.text = "Capital:"
@@ -88,7 +86,6 @@ class CountryDetailsViewController: UIViewController {
     
     let capitalNameLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
         lable.textColor = .black
         return lable
@@ -97,7 +94,6 @@ class CountryDetailsViewController: UIViewController {
     
     var coordinatesDot: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
         view.layer.cornerRadius = 5
         return view
@@ -105,7 +101,6 @@ class CountryDetailsViewController: UIViewController {
     
     let coordinatesLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 15)
         lable.textColor = .gray
         lable.text = "Сoordinates:"
@@ -114,7 +109,6 @@ class CountryDetailsViewController: UIViewController {
     
     let coordinatesNameLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
         lable.textColor = .black
         return lable
@@ -122,7 +116,6 @@ class CountryDetailsViewController: UIViewController {
     
     var populationDot: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
         view.layer.cornerRadius = 5
         return view
@@ -130,7 +123,6 @@ class CountryDetailsViewController: UIViewController {
     
     let populationLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 15)
         lable.textColor = .gray
         lable.text = "Population:"
@@ -139,7 +131,6 @@ class CountryDetailsViewController: UIViewController {
     
     let populationNameLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
         lable.textColor = .black
         return lable
@@ -147,7 +138,6 @@ class CountryDetailsViewController: UIViewController {
     
     var areaDot: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
         view.layer.cornerRadius = 5
         return view
@@ -155,7 +145,6 @@ class CountryDetailsViewController: UIViewController {
     
     let areaLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 15)
         lable.textColor = .gray
         lable.text = "Area:"
@@ -164,7 +153,6 @@ class CountryDetailsViewController: UIViewController {
     
     let areaNameLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
         lable.textColor = .black
         return lable
@@ -172,7 +160,6 @@ class CountryDetailsViewController: UIViewController {
     
     var currencyDot: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
         view.layer.cornerRadius = 5
         return view
@@ -180,7 +167,6 @@ class CountryDetailsViewController: UIViewController {
     
     let currencyLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 15)
         lable.textColor = .gray
         lable.text = "Currency:"
@@ -189,7 +175,6 @@ class CountryDetailsViewController: UIViewController {
     
     let currencyNameLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
         lable.textColor = .black
         lable.text = "Пока не сделала валюту"
@@ -198,7 +183,6 @@ class CountryDetailsViewController: UIViewController {
     
     var timezonesDot: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
         view.layer.cornerRadius = 5
         return view
@@ -206,7 +190,6 @@ class CountryDetailsViewController: UIViewController {
     
     let timezonesLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 15)
         lable.textColor = .gray
         lable.text = "Timezones:"
@@ -215,7 +198,6 @@ class CountryDetailsViewController: UIViewController {
     
     let timezonesNameLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
         lable.textColor = .black
         lable.numberOfLines = 0
@@ -260,12 +242,18 @@ class CountryDetailsViewController: UIViewController {
         
         
         scrollView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+           //make.edges.equalTo(view.safeAreaLayoutGuide)
+            //make.edges.equalTo(self.view)
+            make.edges.equalToSuperview()
         }
         
         contentView.snp.makeConstraints { make in
-            make.edges.width.equalTo(scrollView)
-            make.height.greaterThanOrEqualTo(view.snp.height)
+//            make.edges.width.equalTo(scrollView)
+//            make.height.greaterThanOrEqualTo(view.snp.height).offset(20)
+            make.edges.equalToSuperview()
+            make.width.equalTo(scrollView.snp.width)
+            //make.height.greaterThanOrEqualTo(view.snp.height).offset(20)
+           
         }
         
         flagsImageView.snp.makeConstraints { make in
@@ -388,17 +376,14 @@ class CountryDetailsViewController: UIViewController {
         timezonesNameLabel.snp.makeConstraints { make in
             make.top.equalTo(timezonesLabel.snp.bottom).offset(4)
             make.leading.equalTo(regionLabel)
-            make.bottom.equalTo(contentView.snp.bottom).offset(-40)
+           // make.bottom.equalTo(contentView.snp.bottom).offset(-40)
         }
+        
+
+        
+        contentView.snp.makeConstraints { make in
+                    make.bottom.equalTo(timezonesNameLabel.snp.bottom).offset(16) // Замените timezonesNameLabel на последний элемент в вашем contentView
+                }
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
