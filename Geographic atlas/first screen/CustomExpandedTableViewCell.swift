@@ -158,9 +158,9 @@ class CustomExpandedTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             contentWhiteView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            contentWhiteView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            contentWhiteView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             contentWhiteView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            contentWhiteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            contentWhiteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             contentWhiteView.heightAnchor.constraint(equalToConstant: 216),
             
             flagsImageView.topAnchor.constraint(equalTo: contentWhiteView.topAnchor, constant: 16),

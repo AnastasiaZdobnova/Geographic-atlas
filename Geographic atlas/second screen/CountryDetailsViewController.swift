@@ -31,7 +31,7 @@ class CountryDetailsViewController: UIViewController {
     let contentView: UIView = {
         let view = UIView()
 //        view.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.98, alpha: 1.0)
-        view.backgroundColor = .yellow
+        view.backgroundColor = .white
         return view
     }()
     
