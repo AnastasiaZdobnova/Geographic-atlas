@@ -129,14 +129,19 @@ class CustomExpandedTableViewCell: UITableViewCell {
             
             countryDetailsVC.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: countryData.flags.png)!))
             countryDetailsVC.regionNameLabel.text = countryData.region
-            countryDetailsVC.capitalNameLabel.text = countryData.capital?.first
+            
+            if let capital = countryData.capital?.first {
+                countryDetailsVC.capitalNameLabel.text = capital
+            } else {
+                countryDetailsVC.capitalNameLabel.text = "No capital"
+            }
             if let latlng = countryData.capitalInfo.latlng {
                 let latitude = latlng[0]
                 let longitude = latlng[1]
                 let coordinatesString = String(latitude) + ", " + String(longitude)
                 countryDetailsVC.coordinatesNameLabel.text = coordinatesString
             } else {
-                countryDetailsVC.coordinatesNameLabel.text = "Нет данных о координатах"
+                countryDetailsVC.coordinatesNameLabel.text = "No data about coordinates"
             }
             
             countryDetailsVC.populationNameLabel.text = String(countryData.population)

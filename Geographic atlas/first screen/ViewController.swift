@@ -134,7 +134,11 @@ extension ViewController: UITableViewDataSource{
             let country = countries[indexPath.row]
             
             cell.countryNameLabel.text = country.countryName
-            cell.capitalLabel.text = country.capital?.first
+            if let capital = country.capital {
+                cell.capitalLabel.text = country.capital?.first
+            } else {
+                cell.capitalLabel.text = "No capital"
+            }
             cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
             if let countryData = APIManager.shared.countryData.first(where: { $0.cca2 == country.cca2 }) {
                 
@@ -158,8 +162,24 @@ extension ViewController: UITableViewDataSource{
                 else {
                     cell.populationLabel.text = String(countryData.population) + " people"
                 }
-                
-                cell.currenciesLabel.text = "потом доделаем"
+            
+                if let currencies = countryData.currencies {
+                    // У страны есть валюты
+                    
+                    if currencies.count > 1 {
+                        let currencyCodes = currencies.keys.sorted()
+                        let joinedCurrencyCodes = currencyCodes.joined(separator: ", ")
+                        cell.currenciesLabel.text = joinedCurrencyCodes
+                        
+                    } else if let (currencyCode, currency) = currencies.first {
+                        let currencyString = "\(currency.name) (\(currencyCode)) (\(currency.symbol ?? ""))"
+                                print(currencyString)
+                        cell.currenciesLabel.text = currencyString
+                    }
+                } else {
+                    // У страны нет валют
+                    cell.currenciesLabel.text = "The country has no currency"
+                }
             }
             return cell
             
@@ -172,7 +192,11 @@ extension ViewController: UITableViewDataSource{
             let country = countries[indexPath.row]
             
             cell.countryNameLabel.text = country.countryName
-            cell.capitalLabel.text = country.capital?.first
+            if let capital = country.capital {
+                cell.capitalLabel.text = country.capital?.first
+            } else {
+                cell.capitalLabel.text = "No capital"
+            }
             cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
             
             return cell
