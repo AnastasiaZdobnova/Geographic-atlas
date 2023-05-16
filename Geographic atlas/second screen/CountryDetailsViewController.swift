@@ -173,7 +173,7 @@ class CountryDetailsViewController: UIViewController {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
         lable.textColor = UIColor.textAccentColor
-        lable.text = "Пока не сделала валюту"
+        lable.numberOfLines = 0
         return lable
     }()
     

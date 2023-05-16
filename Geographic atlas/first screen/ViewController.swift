@@ -139,7 +139,9 @@ extension ViewController: UITableViewDataSource{
             } else {
                 cell.capitalLabel.text = "No capital"
             }
+            
             cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
+            
             if let countryData = APIManager.shared.countryData.first(where: { $0.cca2 == country.cca2 }) {
                 
                 let number: Double = countryData.area / 1000000
@@ -172,7 +174,7 @@ extension ViewController: UITableViewDataSource{
                         cell.currenciesLabel.text = joinedCurrencyCodes
                         
                     } else if let (currencyCode, currency) = currencies.first {
-                        let currencyString = "\(currency.name) (\(currencyCode)) (\(currency.symbol ?? ""))"
+                        let currencyString = "\(currency.name) (\(currency.symbol ?? "")) (\(currencyCode))"
                                 print(currencyString)
                         cell.currenciesLabel.text = currencyString
                     }

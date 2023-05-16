@@ -189,7 +189,18 @@ class CustomExpandedTableViewCell: UITableViewCell {
                 countryDetailsVC.areaNameLabel.text = formattedArea + " km²"
             }
             
-           
+            if let currencies = countryData.currencies {
+                // У страны есть валюты
+                let currencyStrings = currencies.map { currency -> String in
+                    let currencyCode = currency.key
+                    return "\(currency.value.name) (\(currency.value.symbol ?? "")) (\(currencyCode))"
+                }
+                let allCurrenciesString = currencyStrings.joined(separator: "\n")
+                countryDetailsVC.currencyNameLabel.text = allCurrenciesString
+            } else {
+                // У страны нет валют
+                countryDetailsVC.currencyNameLabel.text = "The country has no currency"
+            }
             
             let timezonesString = countryData.timezones.joined(separator: "\n")
             countryDetailsVC.timezonesNameLabel.text = timezonesString
