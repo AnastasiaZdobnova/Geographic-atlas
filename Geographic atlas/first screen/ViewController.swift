@@ -6,6 +6,7 @@
 //
 //
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
     
@@ -15,23 +16,21 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+        
         view.backgroundColor = UIColor.viewColor
+        
         self.navigationController?.navigationBar.backgroundColor = UIColor.navigationBarColor
         navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
+        
         title = "World countries"
-
         
         tableView = UITableView(frame: view.bounds, style: .plain)
         
         APIManager.shared.completionHandler = { [weak self] in
-            self?.printUnique()
             self?.tableView.reloadData()
         }
         
         APIManager.shared.getData()
-        
         
         layout()
     }
@@ -40,7 +39,6 @@ class ViewController: UIViewController {
         
         // Добавление UITableView в иерархию представлений
         view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         // Настройка делегата и источника данных
         tableView.delegate = self
         tableView.dataSource = self
@@ -48,32 +46,13 @@ class ViewController: UIViewController {
         tableView.register(CustomExpandedTableViewCell.self, forCellReuseIdentifier: "CustomExpandedTableViewCell")
         tableView.separatorStyle = .none
         
-        NSLayoutConstraint.activate([
-        
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        
-        
-        ])
-        
-        
-    }
-    
-    func printUnique() {
-        if DataManager.uniqueRegions.isEmpty {
-            print("Массив uniqueRegions пуст")
-        } else {
-            for region in DataManager.uniqueRegions {
-                print(region)
-            }
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
+            make.trailing.equalTo(view.snp.trailing)
+            make.bottom.equalTo(view.snp.bottom)
         }
-        //tableView.reloadData()
-        
     }
-    
-    
 }
 
 
@@ -82,46 +61,47 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30.0 // Задайте желаемую высоту для заголовка секции
+        return 30.0 // Высота заголовка секции
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
         let headerView = UIView()
-        let titleLabel = UILabel()
         headerView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
-        //regular
-        let blurEffect = UIBlurEffect(style: .regular) // Выберите стиль размытия, который вам нравится
-            let blurView = UIVisualEffectView(effect: blurEffect)
-            blurView.frame = headerView.bounds
-            blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            headerView.addSubview(blurView)
-
-
+        
+        let blurEffect = UIBlurEffect(style: .regular)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        headerView.addSubview(blurView)
+        blurView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        let titleLabel = UILabel()
         titleLabel.font = UIFont(name: "SFProText-Bold", size: 15)
         titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
-
         titleLabel.textColor = UIColor.headerInSection
         titleLabel.text = DataManager.uniqueRegions[section].uppercased()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-
-
-        let attributedText = NSMutableAttributedString(string: DataManager.uniqueRegions[section].uppercased())
-        let letterSpacing: CGFloat = 1.2
-        attributedText.addAttribute(NSAttributedString.Key.kern, value: letterSpacing, range: NSRange(location: 0, length: attributedText.length))
-        titleLabel.attributedText = attributedText
-
-
         headerView.addSubview(titleLabel)
-
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
-            titleLabel.topAnchor.constraint(equalTo: headerView.topAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16)
-        ])
-
+        
+        titleLabel.snp.makeConstraints { make in
+            make.leading.equalTo(headerView).offset(16)
+            make.top.equalTo(headerView)
+            make.bottom.equalTo(headerView)
+            make.trailing.equalTo(headerView).offset(-16)
+        }
+        
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let index = selectedIndexes.firstIndex(of: indexPath) {
+            // Ячейка уже выбрана, снимаем выбор
+            selectedIndexes.remove(at: index)
+        } else {
+            // Выбрана новая ячейка, добавляем индекс в массив
+            selectedIndexes.append(indexPath)
+        }
+        tableView.reloadData()
     }
     
 }
@@ -130,9 +110,7 @@ extension ViewController: UITableViewDelegate{
 extension ViewController: UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        print("Вот сколько у меня секций\(DataManager.uniqueRegions.count)")
         return DataManager.uniqueRegions.count
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -159,7 +137,6 @@ extension ViewController: UITableViewDataSource{
             cell.capitalLabel.text = country.capital?.first
             cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
             if let countryData = APIManager.shared.countryData.first(where: { $0.cca2 == country.cca2 }) {
-                // Вытащите нужные данные из countryData
                 cell.areaLabel.text = String(countryData.area)
                 cell.populationLabel.text = String(countryData.population)
                 cell.currenciesLabel.text = "потом доделаем"
@@ -177,24 +154,9 @@ extension ViewController: UITableViewDataSource{
             cell.countryNameLabel.text = country.countryName
             cell.capitalLabel.text = country.capital?.first
             cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
-           
             
             return cell
         }
         
     }
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let index = selectedIndexes.firstIndex(of: indexPath) {
-            // Ячейка уже выбрана, снимаем выбор
-            selectedIndexes.remove(at: index)
-        } else {
-            // Выбрана новая ячейка, добавляем индекс в массив
-            selectedIndexes.append(indexPath)
-        }
-        tableView.reloadData()
-    }
-    
-    
 }
