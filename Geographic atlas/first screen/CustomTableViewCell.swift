@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class CustomTableViewCell: UITableViewCell {
     
@@ -17,7 +18,6 @@ class CustomTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -26,7 +26,6 @@ class CustomTableViewCell: UITableViewCell {
     let contentWhiteView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.cellColor
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
         view.layer.cornerRadius = 8
         return view
@@ -34,7 +33,6 @@ class CustomTableViewCell: UITableViewCell {
     
     var countryNameLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 17)
         lable.textColor = UIColor.textAccentColor
         return lable
@@ -42,7 +40,6 @@ class CustomTableViewCell: UITableViewCell {
     
     let chevronDownLabel : UIImageView = {
         let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(systemName: "chevron.down")
         imageView.tintColor = UIColor.arrowColor
         imageView.contentMode = .scaleAspectFit
@@ -51,7 +48,6 @@ class CustomTableViewCell: UITableViewCell {
     
     let capitalLabel: UILabel = {
         let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Regular", size: 13)
         lable.textColor = UIColor.textAdditionalColor
         return lable
@@ -67,48 +63,55 @@ class CustomTableViewCell: UITableViewCell {
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
-            selectionStyle = .none
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
         
-            [contentWhiteView, flagsImageView, countryNameLabel, capitalLabel,chevronDownLabel].forEach {
-                contentView.addSubview($0)
-            }
-        
-        
-            NSLayoutConstraint.activate([
-                contentWhiteView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-                contentWhiteView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-                contentWhiteView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-                contentWhiteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                contentWhiteView.heightAnchor.constraint(equalToConstant: 72),
-                
-                flagsImageView.topAnchor.constraint(equalTo: contentWhiteView.topAnchor, constant: 16),
-                flagsImageView.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 16),
-                flagsImageView.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -16),
-                flagsImageView.heightAnchor.constraint(equalToConstant: 48),
-                flagsImageView.widthAnchor.constraint(equalToConstant: 82),
-                
-                countryNameLabel.topAnchor.constraint(equalTo: flagsImageView.topAnchor),
-                countryNameLabel.leadingAnchor.constraint(equalTo: flagsImageView.trailingAnchor, constant: 16),
-                
-                capitalLabel.leadingAnchor.constraint(equalTo: countryNameLabel.leadingAnchor),
-                capitalLabel.topAnchor.constraint(equalTo: countryNameLabel.bottomAnchor, constant: 4),
-                
-                chevronDownLabel.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: -12),
-                chevronDownLabel.topAnchor.constraint(equalTo: contentWhiteView.topAnchor, constant: 24),
-                chevronDownLabel.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -24)
-                
-            ])
+        [contentWhiteView, flagsImageView, countryNameLabel, capitalLabel,chevronDownLabel].forEach {
+            contentView.addSubview($0)
         }
         
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-    
         
-      
+        contentWhiteView.snp.makeConstraints { make in
+            make.top.equalTo(contentView).offset(12)
+            make.leading.equalTo(contentView).offset(16)
+            make.bottom.equalTo(contentView)
+            make.trailing.equalTo(contentView).offset(-16)
+            make.height.equalTo(72)
+        }
+        
+        flagsImageView.snp.makeConstraints { make in
+            make.top.equalTo(contentWhiteView).offset(16)
+            make.leading.equalTo(contentWhiteView).offset(16)
+            make.bottom.equalTo(contentWhiteView).offset(-16)
+            make.height.equalTo(48)
+            make.width.equalTo(82)
+        }
+        
+        countryNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(flagsImageView)
+            make.leading.equalTo(flagsImageView.snp.trailing).offset(16)
+        }
+        
+        capitalLabel.snp.makeConstraints { make in
+            make.leading.equalTo(countryNameLabel)
+            make.top.equalTo(countryNameLabel.snp.bottom).offset(4)
+        }
+        
+        chevronDownLabel.snp.makeConstraints { make in
+            make.trailing.equalTo(contentWhiteView).offset(-12)
+            make.top.equalTo(contentWhiteView).offset(24)
+            make.bottom.equalTo(contentWhiteView).offset(-24)
+        }
+    }
     
-
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    
+    
+    
     
 }
 
