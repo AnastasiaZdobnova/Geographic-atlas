@@ -138,7 +138,12 @@ extension ViewController: UITableViewDataSource{
             cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
             if let countryData = APIManager.shared.countryData.first(where: { $0.cca2 == country.cca2 }) {
                 cell.areaLabel.text = String(countryData.area)
-                cell.populationLabel.text = String(countryData.population)
+                if (countryData.population / 1000000) != 0{
+                    cell.populationLabel.text = String(countryData.population / 1000000) + " mln"
+                }
+                else{
+                    cell.populationLabel.text = String(countryData.population / 1000) + " ths"
+                }
                 cell.currenciesLabel.text = "потом доделаем"
             }
             return cell
