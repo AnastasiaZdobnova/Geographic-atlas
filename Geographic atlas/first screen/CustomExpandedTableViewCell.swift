@@ -92,6 +92,17 @@ class CustomExpandedTableViewCell: UITableViewCell {
         return button
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        flagsImageView.image = nil
+        countryNameLabel.text = ""
+        capitalLabel.text = ""
+        populationLabel.text = ""
+        areaLabel.text = ""
+        currenciesLabel.text = ""
+        
+    }
+    
     @objc func learnMoreButtonTapped() {
         // Создать экземпляр CountryDetailsViewController и передать необходимые данные
         let countryDetailsVC = CountryDetailsViewController()

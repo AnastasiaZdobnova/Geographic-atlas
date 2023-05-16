@@ -9,7 +9,6 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var CountryFirstInfo = [(countryName: String, cca2: String, capital: [String]?, flags: String, isExpanded: Bool)]()
     var selectedIndexes: [IndexPath] = []
     
     
@@ -52,10 +51,10 @@ class ViewController: UIViewController {
         
         NSLayoutConstraint.activate([
         
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12)
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         
         
         ])
@@ -82,9 +81,50 @@ class ViewController: UIViewController {
 
 //MARK: - UITableViewDelegate
 extension ViewController: UITableViewDelegate{
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 18.0 // Задайте желаемую высоту для заголовка секции
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        let headerView = UIView()
+        let titleLabel = UILabel()
+        headerView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        //regular
+        let blurEffect = UIBlurEffect(style: .regular) // Выберите стиль размытия, который вам нравится
+            let blurView = UIVisualEffectView(effect: blurEffect)
+            blurView.frame = headerView.bounds
+            blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            headerView.addSubview(blurView)
+
+
+        titleLabel.font = UIFont(name: "SFProText-Bold", size: 15)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
+
+        titleLabel.textColor = UIColor(red: 171/255, green: 179/255, blue: 187/255, alpha: 1.0)
+        titleLabel.text = DataManager.uniqueRegions[section].uppercased()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+
+
+        let attributedText = NSMutableAttributedString(string: DataManager.uniqueRegions[section].uppercased())
+        let letterSpacing: CGFloat = 1.2
+        attributedText.addAttribute(NSAttributedString.Key.kern, value: letterSpacing, range: NSRange(location: 0, length: attributedText.length))
+        titleLabel.attributedText = attributedText
+
+
+        headerView.addSubview(titleLabel)
+
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
+            titleLabel.topAnchor.constraint(equalTo: headerView.topAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16)
+        ])
+
+        return headerView
+    }
+    
 }
 
 //MARK: - UITableViewDataSource
@@ -119,17 +159,14 @@ extension ViewController: UITableViewDataSource{
             cell.countryNameLabel.text = country.countryName
             cell.capitalLabel.text = country.capital?.first
             cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
-
             if let countryData = APIManager.shared.countryData.first(where: { $0.cca2 == country.cca2 }) {
                 // Вытащите нужные данные из countryData
                 cell.areaLabel.text = "Area: " + String(countryData.area)
                 cell.populationLabel.text = "Population: " + String(countryData.population)
                 cell.currenciesLabel.text = "Currencies: "+"потом доделаем"
             }
-            
-            
-            
             return cell
+            
         } else {
             // Ячейка закрыта, возвращаем CustomTableViewCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
@@ -141,6 +178,7 @@ extension ViewController: UITableViewDataSource{
             cell.countryNameLabel.text = country.countryName
             cell.capitalLabel.text = country.capital?.first
             cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
+           
             
             return cell
         }
@@ -148,38 +186,7 @@ extension ViewController: UITableViewDataSource{
     }
     
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.clear
-        
-        let titleLabel = UILabel()
-        titleLabel.font = UIFont(name: "SFProText-Bold", size: 15)
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        titleLabel.textColor = UIColor(red: 171/255, green: 179/255, blue: 187/255, alpha: 1.0)
-        titleLabel.text = DataManager.uniqueRegions[section].uppercased()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        let attributedText = NSMutableAttributedString(string: DataManager.uniqueRegions[section].uppercased())
-        let letterSpacing: CGFloat = 1.2
-        attributedText.addAttribute(NSAttributedString.Key.kern, value: letterSpacing, range: NSRange(location: 0, length: attributedText.length))
-        titleLabel.attributedText = attributedText
-        
-        
-        headerView.addSubview(titleLabel)
-        
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
-            titleLabel.topAnchor.constraint(equalTo: headerView.topAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16)
-        ])
-        
-        return headerView
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Хуета")
         if let index = selectedIndexes.firstIndex(of: indexPath) {
             // Ячейка уже выбрана, снимаем выбор
             selectedIndexes.remove(at: index)

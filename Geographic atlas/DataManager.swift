@@ -16,20 +16,4 @@ class DataManager {
     
 }
 
-//import Foundation
-//class DataManager {
-//    static let shared = DataManager()
-//    static var uniqueRegions = [String]()
-//
-//    func getCountriesInRegion(_ region: String) -> [(countryName: String, cca2: String, capital: String, flag: String)] {
-//        return APIManager.shared.countryList
-//            .filter { $0.region == region }
-//            .compactMap { country -> (countryName: String, cca2: String, capital: String, flag: String)? in
-//                guard let capital = country.capital?.first else {
-//                    return nil
-//                }
-//                return (countryName: country.countryName, cca2: country.cca2, capital: capital, flag: country.flagImageName) as! (countryName: String, cca2: String, capital: String, flag: String)
-//            }
-//    }
-//
-//}
+

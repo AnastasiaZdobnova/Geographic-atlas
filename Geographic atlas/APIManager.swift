@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class APIManager {
     
@@ -44,5 +45,29 @@ class APIManager {
         
         task.resume()
     }
+    
+//    func getFlag(flags: String, completion: @escaping (UIImage?) -> Void) {
+//        guard let url = URL(string: flags) else {
+//            completion(nil)
+//            return
+//        }
+//        
+//        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+//            if let error = error {
+//                print("Error: \(error)")
+//                completion(nil)
+//                return
+//            }
+//            
+//            guard let data = data, let image = UIImage(data: data) else {
+//                completion(nil)
+//                return
+//            }
+//            
+//            completion(image)
+//        }
+//        
+//        task.resume()
+//    }
 }
 
