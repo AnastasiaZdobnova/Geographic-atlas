@@ -167,8 +167,30 @@ class CustomExpandedTableViewCell: UITableViewCell {
                 countryDetailsVC.coordinatesNameLabel.text = "No data about coordinates"
             }
             
-            countryDetailsVC.populationNameLabel.text = String(countryData.population)
-            countryDetailsVC.areaNameLabel.text = String(countryData.area)
+            if (countryData.population / 1000000) != 0{
+                countryDetailsVC.populationNameLabel.text = String(countryData.population / 1000000) + " mln"
+            }
+            else if (countryData.population / 1000) != 0 {
+                countryDetailsVC.populationNameLabel.text = String(countryData.population / 1000) + " ths"
+            }
+            else {
+                countryDetailsVC.populationNameLabel.text = String(countryData.population) + " people"
+            }
+            
+            let area: Double = countryData.area
+
+            let numberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .decimal
+            numberFormatter.groupingSeparator = " "
+
+            let formattedArea = numberFormatter.string(from: NSNumber(value: area))
+
+            if let formattedArea = formattedArea {
+                countryDetailsVC.areaNameLabel.text = formattedArea + " km²"
+            }
+            
+           
+            
             let timezonesString = countryData.timezones.joined(separator: "\n")
             countryDetailsVC.timezonesNameLabel.text = timezonesString
             
