@@ -20,6 +20,7 @@ class ViewController: UIViewController {
         let backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1.0)
         view.backgroundColor = backgroundColor
         self.navigationController?.navigationBar.backgroundColor = backgroundColor
+        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         title = "World countries"
 
