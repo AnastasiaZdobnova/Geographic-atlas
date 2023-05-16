@@ -160,9 +160,9 @@ extension ViewController: UITableViewDataSource{
             cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
             if let countryData = APIManager.shared.countryData.first(where: { $0.cca2 == country.cca2 }) {
                 // Вытащите нужные данные из countryData
-                cell.areaLabel.text = "Area: " + String(countryData.area)
-                cell.populationLabel.text = "Population: " + String(countryData.population)
-                cell.currenciesLabel.text = "Currencies: "+"потом доделаем"
+                cell.areaLabel.text = String(countryData.area)
+                cell.populationLabel.text = String(countryData.population)
+                cell.currenciesLabel.text = "потом доделаем"
             }
             return cell
             

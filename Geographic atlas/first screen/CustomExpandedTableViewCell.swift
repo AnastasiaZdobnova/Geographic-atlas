@@ -52,8 +52,24 @@ class CustomExpandedTableViewCell: UITableViewCell {
         return lable
     }()
     
+    let populationLabelBeginning: UILabel = {
+        let label = UILabel()
+        label.text = "Population:"
+        label.font = UIFont(name: "SFProText-Regular", size: 13)
+        label.textColor = UIColor.textAdditionalColor
+        return label
+    }()
+    
     let populationLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "SFProText-Regular", size: 13)
+        label.textColor = UIColor.textAccentColor
+        return label
+    }()
+    
+    let areaLabelBeginning: UILabel = {
+        let label = UILabel()
+        label.text = "Area:"
         label.font = UIFont(name: "SFProText-Regular", size: 13)
         label.textColor = UIColor.textAdditionalColor
         return label
@@ -62,16 +78,26 @@ class CustomExpandedTableViewCell: UITableViewCell {
     let areaLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "SFProText-Regular", size: 13)
+        label.textColor = UIColor.textAccentColor
+        return label
+    }()
+    
+    let currenciesLabelBeginning: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "SFProText-Regular", size: 13)
         label.textColor = UIColor.textAdditionalColor
+        label.text = "Currencies: "
         return label
     }()
     
     let currenciesLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "SFProText-Regular", size: 13)
-        label.textColor = UIColor.textAdditionalColor
+        label.textColor = UIColor.textAccentColor
         return label
     }()
+    
+    
     
     let learnMoreButton: UIButton = {
         let button = UIButton()
@@ -89,6 +115,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
         populationLabel.text = ""
         areaLabel.text = ""
         currenciesLabel.text = ""
+        
         
     }
     //MARK: -  learnMoreButtonTapped()
@@ -131,7 +158,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
             contentView.addSubview($0)
         }
         
-        [populationLabel, areaLabel, currenciesLabel, learnMoreButton].forEach {
+        [populationLabelBeginning, populationLabel,areaLabelBeginning, areaLabel, currenciesLabelBeginning, currenciesLabel, learnMoreButton].forEach {
             contentView.addSubview($0)
         }
         
@@ -165,26 +192,43 @@ class CustomExpandedTableViewCell: UITableViewCell {
             make.top.equalTo(contentWhiteView).offset(24)
         }
         
-        populationLabel.snp.makeConstraints { make in
+        populationLabelBeginning.snp.makeConstraints { make in
             make.leading.equalTo(flagsImageView)
             make.top.equalTo(flagsImageView.snp.bottom).offset(12)
         }
-        
-        areaLabel.snp.makeConstraints { make in
-            make.leading.equalTo(populationLabel)
-            make.top.equalTo(populationLabel.snp.bottom).offset(8)
+
+        populationLabel.snp.makeConstraints { make in
+            make.leading.equalTo(populationLabelBeginning.snp.trailing).offset(4)
+            make.top.equalTo(populationLabelBeginning)
+            make.bottom.equalTo(populationLabelBeginning)
         }
         
-        currenciesLabel.snp.makeConstraints { make in
-            make.leading.equalTo(populationLabel)
+        areaLabelBeginning.snp.makeConstraints { make in
+            make.leading.equalTo(populationLabelBeginning)
+            make.top.equalTo(populationLabelBeginning.snp.bottom).offset(8)
+        }
+        
+        areaLabel.snp.makeConstraints { make in
+            make.leading.equalTo(areaLabelBeginning.snp.trailing).offset(4)
+            make.top.equalTo(areaLabelBeginning)
+            make.bottom.equalTo(areaLabelBeginning)
+        }
+        
+        currenciesLabelBeginning.snp.makeConstraints { make in
+            make.leading.equalTo(areaLabelBeginning)
             make.top.equalTo(areaLabel.snp.bottom).offset(8)
+        }
+
+        currenciesLabel.snp.makeConstraints { make in
+            make.leading.equalTo(currenciesLabelBeginning.snp.trailing).offset(4)
+            make.top.equalTo(currenciesLabelBeginning.snp.top)
+            make.bottom.equalTo(currenciesLabelBeginning)
         }
         
         learnMoreButton.snp.makeConstraints { make in
-            make.leading.equalTo(populationLabel)
-            make.top.equalTo(currenciesLabel.snp.bottom).offset(12)
-            make.trailing.equalTo(contentWhiteView).offset(-12)
-            make.bottom.equalTo(contentWhiteView).offset(-12)
+            make.top.equalTo(currenciesLabel.snp.bottom).offset(26)
+            make.centerX.equalTo(contentWhiteView)
+            make.bottom.equalTo(contentWhiteView).offset(-26)
         }
     }
     
