@@ -27,7 +27,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
     
     let contentWhiteView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.98, alpha: 1.0)
+        view.backgroundColor = UIColor.cellColor
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
         view.layer.cornerRadius = 8
@@ -38,7 +38,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
         let lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Bold", size: 17)
-        lable.textColor = .black
+        lable.textColor = UIColor.textAccentColor
         return lable
     }()
     
@@ -46,7 +46,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(systemName: "chevron.up")
-        imageView.tintColor = .black
+        imageView.tintColor = UIColor.arrowColor
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -55,7 +55,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
         let lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
         lable.font = UIFont(name: "SFProText-Regular", size: 13)
-        lable.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1.0)
+        lable.textColor = UIColor.textAdditionalColor
         return lable
     }()
     
@@ -63,7 +63,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "SFProText-Regular", size: 13)
-        label.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1.0)
+        label.textColor = UIColor.textAdditionalColor
         return label
     }()
 
@@ -71,7 +71,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "SFProText-Regular", size: 13)
-        label.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1.0)
+        label.textColor = UIColor.textAdditionalColor
         return label
     }()
 
@@ -79,7 +79,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "SFProText-Regular", size: 13)
-        label.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1.0)
+        label.textColor = UIColor.textAdditionalColor
         return label
     }()
     
@@ -88,7 +88,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Learn more", for: .normal)
         button.addTarget(self, action: #selector(learnMoreButtonTapped), for: .touchUpInside)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(UIColor.learnMoreButtonColor, for: .normal)
         return button
     }()
     

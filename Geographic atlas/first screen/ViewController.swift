@@ -9,17 +9,15 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var selectedIndexes: [IndexPath] = []
-    
+    var selectedIndexes: [IndexPath] = [] // индексы открытых ячеек
     
     var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .blue
-        let backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1.0)
-        view.backgroundColor = backgroundColor
-        self.navigationController?.navigationBar.backgroundColor = backgroundColor
+        view.backgroundColor = UIColor.viewColor
+        self.navigationController?.navigationBar.backgroundColor = UIColor.navigationBarColor
         navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         title = "World countries"
@@ -84,7 +82,7 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 18.0 // Задайте желаемую высоту для заголовка секции
+        return 30.0 // Задайте желаемую высоту для заголовка секции
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -103,7 +101,7 @@ extension ViewController: UITableViewDelegate{
         titleLabel.font = UIFont(name: "SFProText-Bold", size: 15)
         titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
 
-        titleLabel.textColor = UIColor(red: 171/255, green: 179/255, blue: 187/255, alpha: 1.0)
+        titleLabel.textColor = UIColor.headerInSection
         titleLabel.text = DataManager.uniqueRegions[section].uppercased()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
 

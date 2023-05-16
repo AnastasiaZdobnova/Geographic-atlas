@@ -12,9 +12,8 @@ class CountryDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1.0)
-        view.backgroundColor = backgroundColor
-        self.navigationController?.navigationBar.backgroundColor = backgroundColor
+        view.backgroundColor = UIColor.viewColor
+        self.navigationController?.navigationBar.backgroundColor = UIColor.viewColor
     
        
         
@@ -30,8 +29,7 @@ class CountryDetailsViewController: UIViewController {
     
     let contentView: UIView = {
         let view = UIView()
-//        view.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.98, alpha: 1.0)
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.secondScreencolor
         return view
     }()
     
@@ -40,15 +38,13 @@ class CountryDetailsViewController: UIViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 8
         imageView.layer.masksToBounds = true
-        imageView.layer.shadowColor = UIColor.black.cgColor
-        
         
         return imageView
     }()
     
     var regionDot: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor.dotColor
         view.layer.cornerRadius = 5
         return view
     }()
@@ -56,7 +52,7 @@ class CountryDetailsViewController: UIViewController {
     var regionLabel: UILabel = {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 15)
-        lable.textColor = .gray
+        lable.textColor = UIColor.textAdditionalColor
         lable.text = "Region:"
         return lable
     }()
@@ -65,13 +61,13 @@ class CountryDetailsViewController: UIViewController {
     var regionNameLabel: UILabel = {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
-        lable.textColor = .black
+        lable.textColor = UIColor.textAccentColor
         return lable
     }()
     
     var capitalDot: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor.dotColor
         view.layer.cornerRadius = 5
         return view
     }()
@@ -79,7 +75,7 @@ class CountryDetailsViewController: UIViewController {
     let capitalLabel: UILabel = {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 15)
-        lable.textColor = .gray
+        lable.textColor = UIColor.textAdditionalColor
         lable.text = "Capital:"
         return lable
     }()
@@ -87,14 +83,14 @@ class CountryDetailsViewController: UIViewController {
     let capitalNameLabel: UILabel = {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
-        lable.textColor = .black
+        lable.textColor = UIColor.textAccentColor
         return lable
     }()
     
     
     var coordinatesDot: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor.dotColor
         view.layer.cornerRadius = 5
         return view
     }()
@@ -102,7 +98,7 @@ class CountryDetailsViewController: UIViewController {
     let coordinatesLabel: UILabel = {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 15)
-        lable.textColor = .gray
+        lable.textColor = UIColor.textAdditionalColor
         lable.text = "Сoordinates:"
         return lable
     }()
@@ -110,13 +106,13 @@ class CountryDetailsViewController: UIViewController {
     let coordinatesNameLabel: UILabel = {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
-        lable.textColor = .black
+        lable.textColor = UIColor.textAccentColor
         return lable
     }()
     
     var populationDot: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor.dotColor
         view.layer.cornerRadius = 5
         return view
     }()
@@ -124,7 +120,7 @@ class CountryDetailsViewController: UIViewController {
     let populationLabel: UILabel = {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 15)
-        lable.textColor = .gray
+        lable.textColor = UIColor.textAdditionalColor
         lable.text = "Population:"
         return lable
     }()
@@ -132,13 +128,13 @@ class CountryDetailsViewController: UIViewController {
     let populationNameLabel: UILabel = {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
-        lable.textColor = .black
+        lable.textColor = UIColor.textAccentColor
         return lable
     }()
     
     var areaDot: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor.dotColor
         view.layer.cornerRadius = 5
         return view
     }()
@@ -146,7 +142,7 @@ class CountryDetailsViewController: UIViewController {
     let areaLabel: UILabel = {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 15)
-        lable.textColor = .gray
+        lable.textColor = UIColor.textAdditionalColor
         lable.text = "Area:"
         return lable
     }()
@@ -154,13 +150,13 @@ class CountryDetailsViewController: UIViewController {
     let areaNameLabel: UILabel = {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
-        lable.textColor = .black
+        lable.textColor = UIColor.textAccentColor
         return lable
     }()
     
     var currencyDot: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor.dotColor
         view.layer.cornerRadius = 5
         return view
     }()
@@ -168,7 +164,7 @@ class CountryDetailsViewController: UIViewController {
     let currencyLabel: UILabel = {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 15)
-        lable.textColor = .gray
+        lable.textColor = UIColor.textAdditionalColor
         lable.text = "Currency:"
         return lable
     }()
@@ -176,14 +172,14 @@ class CountryDetailsViewController: UIViewController {
     let currencyNameLabel: UILabel = {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
-        lable.textColor = .black
+        lable.textColor = UIColor.textAccentColor
         lable.text = "Пока не сделала валюту"
         return lable
     }()
     
     var timezonesDot: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor.dotColor
         view.layer.cornerRadius = 5
         return view
     }()
@@ -191,7 +187,7 @@ class CountryDetailsViewController: UIViewController {
     let timezonesLabel: UILabel = {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 15)
-        lable.textColor = .gray
+        lable.textColor = UIColor.textAdditionalColor
         lable.text = "Timezones:"
         return lable
     }()
@@ -199,7 +195,7 @@ class CountryDetailsViewController: UIViewController {
     let timezonesNameLabel: UILabel = {
         let lable = UILabel()
         lable.font = UIFont(name: "SFProText-Bold", size: 30)
-        lable.textColor = .black
+        lable.textColor = UIColor.textAccentColor
         lable.numberOfLines = 0
         return lable
     }()
@@ -382,7 +378,7 @@ class CountryDetailsViewController: UIViewController {
 
         
         contentView.snp.makeConstraints { make in
-                    make.bottom.equalTo(timezonesNameLabel.snp.bottom).offset(16) // Замените timezonesNameLabel на последний элемент в вашем contentView
+                    make.bottom.equalTo(timezonesNameLabel.snp.bottom).offset(58) // Замените timezonesNameLabel на последний элемент в вашем contentView
                 }
     }
     
