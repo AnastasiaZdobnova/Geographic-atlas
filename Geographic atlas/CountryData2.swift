@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Foundation
 
 // MARK: - CountryData
 struct CountryDatum2: Codable {
@@ -17,19 +16,19 @@ struct CountryDatum2: Codable {
     let region: String
     let area: Double
     let flag: String
-    let maps: Maps
+    //let maps: Maps
     let population: Int
-    let timezones: [String]
+    //let timezones: [String]
     let flags: Flags
-    let capitalInfo: CapitalInfo
+    //let capitalInfo: CapitalInfo
 }
 
 //name,cca2,currencies,capital,region,area,flag,maps,population,timezones,flags,capitalInfo
 
 // MARK: - CapitalInfo
-struct CapitalInfo: Codable {
-    let latlng: [Double]?
-}
+//struct CapitalInfo: Codable {
+//    let latlng: [Double]?
+//}
 
 // MARK: - Currencies
 struct Currency: Codable {
@@ -47,9 +46,9 @@ struct Flags: Codable {
 }
 
 // MARK: - Maps
-struct Maps: Codable {
-    let googleMaps, openStreetMaps: String
-}
+//struct Maps: Codable {
+//    let googleMaps, openStreetMaps: String
+//}
 
 // MARK: - Name
 struct Name: Codable {
@@ -61,16 +60,5 @@ struct Translation: Codable {
     let official, common: String
 }
 
-
-enum StartOfWeek: String, Codable {
-    case monday = "monday"
-    case saturday = "saturday"
-    case sunday = "sunday"
-}
-
-enum Status: String, Codable {
-    case officiallyAssigned = "officially-assigned"
-    case userAssigned = "user-assigned"
-}
 
 typealias CountryData2 = [CountryDatum2]

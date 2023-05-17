@@ -13,11 +13,13 @@ class APIManager {
     
     static let shared = APIManager()
     //let urlString = "https://restcountries.com/v3.1/all"
-    let urlString = "https://restcountries.com/v3.1/all?fields=name,cca2,currencies,capital,region,area,flag,maps,population,timezones,flags,capitalInfo"
+    let urlString = "https://restcountries.com/v3.1/all?fields=name,cca2,currencies,capital,region,area,flag,population,flags"
     var completionHandler: (() -> Void)?
     
     //var countryData: [CountryDatum] = [] // Добавленное свойство для хранения данных стран
     var countryData: [CountryDatum2] = [] // Добавленное свойство для хранения данных стран
+    var countryDataFull: [CountryDatum] = []
+    
     func getData() {
         let url = URL(string: urlString)
         var request = URLRequest(url: url!)
@@ -42,6 +44,30 @@ class APIManager {
                 }
             } else {
                 print("Fail decoding")
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func getDataFull(urlString: String) {
+        print("getDataFull func))))))))))))))")
+        print(urlString)
+        let url = URL(string: urlString)
+        let request = URLRequest(url: url!)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else { return }
+            if let countryData = try? JSONDecoder().decode([CountryDatum].self, from: data) {
+                print("Success decoding getDataFull)))))))))))")
+                
+                DispatchQueue.main.async {
+                    self.completionHandler?()
+                }
+                self.countryDataFull = countryData
+                print("передались данные")
+            } else {
+                print("Fail decoding getDataFull))))))))))))")
             }
         }
         

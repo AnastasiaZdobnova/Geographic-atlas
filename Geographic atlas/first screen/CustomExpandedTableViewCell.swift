@@ -129,100 +129,113 @@ class CustomExpandedTableViewCell: UITableViewCell {
         
         if let countryData = APIManager.shared.countryData.first(where: { $0.name.common == countryNameLabel.text }) {
             
-            countryDetailsVC.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: countryData.flags.png)!))
-            countryDetailsVC.regionNameLabel.text = countryData.region
+            let cca2 = countryData.cca2
+            let countryURLString = "https://restcountries.com/v3.1/alpha/\(cca2)"
+            print(countryURLString)
             
             
-            if let capital = countryData.capital.first{
-                countryDetailsVC.capitalNameLabel.text = countryData.capital.first
+            
+            APIManager.shared.completionHandler = { [weak self] in
+                let countryDataFull = APIManager.shared.countryDataFull.first
+                print("вот данные \(countryDataFull)")
                 
-            } else {
-                countryDetailsVC.capitalNameLabel.text = "No capital"
-            }
-            if let capital = countryData.capital.first{
-                if let latlng = countryData.capitalInfo.latlng {
-                    let latitude = latlng[0]
-                    let longitude = latlng[1]
-                    
-                    var latitudeDegrees = ""
-                    var latitudeMinutes = ""
-                    var longitudeDegrees = ""
-                    var longitudeMinutes = ""
-                    
-                    var numberString = String(latitude)
-                    var parts = numberString.split(separator: ".")
-                    
-                    if parts.count == 2 {
-                        latitudeDegrees = String(parts[0])
-                        latitudeMinutes = String(parts[1])
-                    }
-                    
-                    numberString = String(longitude)
-                    parts = numberString.split(separator: ".")
-                    
-                    if parts.count == 2 {
-                        longitudeDegrees = String(parts[0])
-                        longitudeMinutes = String(parts[1])
-                    }
-                    
-                    let coordinatesString = latitudeDegrees + "\u{00B0}" + latitudeMinutes + "\u{2032}, " + longitudeDegrees + "\u{00B0}" + longitudeMinutes + "\u{2032}"
-                    countryDetailsVC.coordinatesNameLabel.text = coordinatesString
-                } 
-            }
-            else{
-                countryDetailsVC.coordinatesNameLabel.text = "No data about coordinates"
-            }
-            
-            if (countryData.population / 1000000) != 0{
-                countryDetailsVC.populationNameLabel.text = String(countryData.population / 1000000) + " mln"
-            }
-            else if (countryData.population / 1000) != 0 {
-                countryDetailsVC.populationNameLabel.text = String(countryData.population / 1000) + " ths"
-            }
-            else {
-                countryDetailsVC.populationNameLabel.text = String(countryData.population) + " people"
-            }
-            
-            let area: Double = countryData.area
+                countryDetailsVC.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: countryDataFull!.flags.png)!))
+                
+                countryDetailsVC.regionNameLabel.text = countryDataFull!.region
 
-            let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = .decimal
-            numberFormatter.groupingSeparator = " "
 
-            let formattedArea = numberFormatter.string(from: NSNumber(value: area))
+                if let capital = countryDataFull!.capital?.first{
+                    countryDetailsVC.capitalNameLabel.text = countryData.capital.first
 
-            if let formattedArea = formattedArea {
-                countryDetailsVC.areaNameLabel.text = formattedArea + " km²"
-            }
-            
-            if let currencies = countryData.currencies {
-                // У страны есть валюты
-                let currencyStrings = currencies.map { currency -> String in
-                    let currencyCode = currency.key
-                    return "\(currency.value.name) (\(currency.value.symbol ?? "")) (\(currencyCode))"
+                } else {
+                    countryDetailsVC.capitalNameLabel.text = "No capital"
                 }
-                let allCurrenciesString = currencyStrings.joined(separator: "\n")
-                
-                let attributedString = NSMutableAttributedString(string: allCurrenciesString)
-                let paragraphStyle = NSMutableParagraphStyle()
-                paragraphStyle.lineSpacing = 4 // Задание межстрочного интервала в 4 поинта
-                attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
-                
-                countryDetailsVC.currencyNameLabel.attributedText = attributedString
-            } else {
-                // У страны нет валют
-                countryDetailsVC.currencyNameLabel.text = "The country has no currency"
-            }
+                if let capital = countryDataFull!.capital?.first{
+                    if let latlng = countryDataFull!.capitalInfo.latlng {
+                        let latitude = latlng[0]
+                        let longitude = latlng[1]
 
-            
-            let timezonesString = countryData.timezones.joined(separator: "\n")
-            let attributedString = NSMutableAttributedString(string: timezonesString)
+                        var latitudeDegrees = ""
+                        var latitudeMinutes = ""
+                        var longitudeDegrees = ""
+                        var longitudeMinutes = ""
+
+                        var numberString = String(latitude)
+                        var parts = numberString.split(separator: ".")
+
+                        if parts.count == 2 {
+                            latitudeDegrees = String(parts[0])
+                            latitudeMinutes = String(parts[1])
+                        }
+
+                        numberString = String(longitude)
+                        parts = numberString.split(separator: ".")
+
+                        if parts.count == 2 {
+                            longitudeDegrees = String(parts[0])
+                            longitudeMinutes = String(parts[1])
+                        }
+
+                        let coordinatesString = latitudeDegrees + "\u{00B0}" + latitudeMinutes + "\u{2032}, " + longitudeDegrees + "\u{00B0}" + longitudeMinutes + "\u{2032}"
+                        countryDetailsVC.coordinatesNameLabel.text = coordinatesString
+                    }
+                }
+                else{
+                    countryDetailsVC.coordinatesNameLabel.text = "No data about coordinates"
+                }
+
+                if (countryDataFull!.population / 1000000) != 0{
+                    countryDetailsVC.populationNameLabel.text = String(countryDataFull!.population / 1000000) + " mln"
+                }
+                else if (countryData.population / 1000) != 0 {
+                    countryDetailsVC.populationNameLabel.text = String(countryDataFull!.population / 1000) + " ths"
+                }
+                else {
+                    countryDetailsVC.populationNameLabel.text = String(countryDataFull!.population) + " people"
+                }
+
+                let area: Double = countryDataFull!.area
+
+                let numberFormatter = NumberFormatter()
+                numberFormatter.numberStyle = .decimal
+                numberFormatter.groupingSeparator = " "
+
+                let formattedArea = numberFormatter.string(from: NSNumber(value: area))
+
+                if let formattedArea = formattedArea {
+                    countryDetailsVC.areaNameLabel.text = formattedArea + " km²"
+                }
+
+                if let currencies = countryDataFull!.currencies {
+                    // У страны есть валюты
+                    let currencyStrings = currencies.map { currency -> String in
+                        let currencyCode = currency.key
+                        return "\(currency.value.name) (\(currency.value.symbol ?? "")) (\(currencyCode))"
+                    }
+                    let allCurrenciesString = currencyStrings.joined(separator: "\n")
+
+                    let attributedString = NSMutableAttributedString(string: allCurrenciesString)
+                    let paragraphStyle = NSMutableParagraphStyle()
+                    paragraphStyle.lineSpacing = 4 // Задание межстрочного интервала в 4 поинта
+                    attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
+
+                    countryDetailsVC.currencyNameLabel.attributedText = attributedString
+                } else {
+                    // У страны нет валют
+                    countryDetailsVC.currencyNameLabel.text = "The country has no currency"
+                }
+
+
+                let timezonesString = countryDataFull!.timezones.joined(separator: "\n")
+                let attributedString = NSMutableAttributedString(string: timezonesString)
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.lineSpacing = 4 // Задание межстрочного интервала в 4 поинта
                 attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
+
+                countryDetailsVC.timezonesNameLabel.attributedText = attributedString
                 
-            countryDetailsVC.timezonesNameLabel.attributedText = attributedString
-            
+            }
+            APIManager.shared.getDataFull(urlString: countryURLString)
         }
         
         navigationController?.pushViewController(countryDetailsVC, animated: true)
@@ -314,6 +327,8 @@ class CustomExpandedTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     
     
 }
