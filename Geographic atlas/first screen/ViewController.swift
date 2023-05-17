@@ -7,6 +7,7 @@
 //
 import UIKit
 import SnapKit
+import SDWebImage
 
 class ViewController: UIViewController {
     
@@ -148,7 +149,9 @@ extension ViewController: UITableViewDataSource{
                 cell.capitalLabel.text = "No capital"
             }
             
-            cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
+            if let flagsURL = URL(string: country.flags) {
+                cell.flagsImageView.sd_setImage(with: flagsURL, completed: nil)
+            }
             
             if let countryData = APIManager.shared.countryData.first(where: { $0.cca2 == country.cca2 }) {
                 
@@ -208,8 +211,10 @@ extension ViewController: UITableViewDataSource{
             } else {
                 cell.capitalLabel.text = "No capital"
             }
-            cell.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: country.flags)!))
-            
+
+            if let flagsURL = URL(string: country.flags) {
+                cell.flagsImageView.sd_setImage(with: flagsURL, completed: nil)
+            }
             return cell
         }
         

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5405BB332A14A32E00330011 /* Assets.xcassets 00-25-15-390.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5405BB322A14A32E00330011 /* Assets.xcassets 00-25-15-390.xcassets */; };
 		5405BB352A14ACA400330011 /* CountryData2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5405BB342A14ACA400330011 /* CountryData2.swift */; };
+		5405BB3A2A14EE5200330011 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 5405BB392A14EE5200330011 /* SDWebImage */; };
 		542E4AF02A124DD10054C518 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 542E4AEF2A124DD10054C518 /* SnapKit */; };
 		542E4AF22A1399220054C518 /* UIColorExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542E4AF12A1399220054C518 /* UIColorExtention.swift */; };
 		5470443C2A0DF42800C262F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5470443B2A0DF42800C262F5 /* AppDelegate.swift */; };
@@ -48,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5405BB3A2A14EE5200330011 /* SDWebImage in Frameworks */,
 				542E4AF02A124DD10054C518 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,6 +129,7 @@
 			name = "Geographic atlas";
 			packageProductDependencies = (
 				542E4AEF2A124DD10054C518 /* SnapKit */,
+				5405BB392A14EE5200330011 /* SDWebImage */,
 			);
 			productName = "Geographic atlas";
 			productReference = 547044382A0DF42800C262F5 /* Geographic atlas.app */;
@@ -158,6 +161,7 @@
 			mainGroup = 5470442F2A0DF42700C262F5;
 			packageReferences = (
 				542E4AEE2A124DD10054C518 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				5405BB382A14EE5200330011 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 547044392A0DF42800C262F5 /* Products */;
 			projectDirPath = "";
@@ -412,6 +416,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5405BB382A14EE5200330011 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		542E4AEE2A124DD10054C518 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -423,6 +435,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5405BB392A14EE5200330011 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5405BB382A14EE5200330011 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
 		542E4AEF2A124DD10054C518 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 542E4AEE2A124DD10054C518 /* XCRemoteSwiftPackageReference "SnapKit" */;

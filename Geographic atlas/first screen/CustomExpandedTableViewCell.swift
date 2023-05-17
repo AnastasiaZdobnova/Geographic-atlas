@@ -138,8 +138,9 @@ class CustomExpandedTableViewCell: UITableViewCell {
             APIManager.shared.completionHandler = { [weak self] in
                 let countryDataFull = APIManager.shared.countryDataFull.first
                 
-                
-                countryDetailsVC.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: countryDataFull!.flags.png)!))
+                if let flagsURL = URL(string: countryDataFull!.flags.png) {
+                    countryDetailsVC.flagsImageView.sd_setImage(with: flagsURL, completed: nil)
+                }
                 
                 countryDetailsVC.regionNameLabel.text = countryDataFull!.region
 
