@@ -16,12 +16,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        for family in UIFont.familyNames {
-            print("Font Family: \(family)")
-            for fontName in UIFont.fontNames(forFamilyName: family) {
-                print("    \(fontName)")
-            }
-        }
+        
         view.backgroundColor = UIColor.viewColor
         
         self.navigationController?.navigationBar.backgroundColor = UIColor.navigationBarColor
@@ -147,8 +142,10 @@ extension ViewController: UITableViewDataSource{
             let country = countries[indexPath.row]
             
             cell.countryNameLabel.text = country.countryName
-            if let capital = country.capital {
+            
+            if let capital = country.capital?.first{
                 cell.capitalLabel.text = country.capital?.first
+                
             } else {
                 cell.capitalLabel.text = "No capital"
             }
@@ -207,8 +204,9 @@ extension ViewController: UITableViewDataSource{
             let country = countries[indexPath.row]
             
             cell.countryNameLabel.text = country.countryName
-            if let capital = country.capital {
+            if let capital = country.capital?.first{
                 cell.capitalLabel.text = country.capital?.first
+                
             } else {
                 cell.capitalLabel.text = "No capital"
             }

@@ -13,7 +13,7 @@ struct CountryDatum2: Codable {
     let name: Name
     let cca2: String
     let currencies: [String: Currency]?
-    let capital: [String]?
+    let capital: [String]
     let region: String
     let area: Double
     let flag: String

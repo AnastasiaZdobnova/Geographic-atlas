@@ -132,40 +132,44 @@ class CustomExpandedTableViewCell: UITableViewCell {
             countryDetailsVC.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: countryData.flags.png)!))
             countryDetailsVC.regionNameLabel.text = countryData.region
             
-            if let capital = countryData.capital?.first {
-                countryDetailsVC.capitalNameLabel.text = capital
+            
+            if let capital = countryData.capital.first{
+                countryDetailsVC.capitalNameLabel.text = countryData.capital.first
+                
             } else {
                 countryDetailsVC.capitalNameLabel.text = "No capital"
             }
-            
-            if let latlng = countryData.capitalInfo.latlng {
-                let latitude = latlng[0]
-                let longitude = latlng[1]
-                
-                var latitudeDegrees = ""
-                var latitudeMinutes = ""
-                var longitudeDegrees = ""
-                var longitudeMinutes = ""
-                
-                var numberString = String(latitude)
-                var parts = numberString.split(separator: ".")
-
-                if parts.count == 2 {
-                    latitudeDegrees = String(parts[0])
-                    latitudeMinutes = String(parts[1])
-                }
-                
-                numberString = String(longitude)
-                parts = numberString.split(separator: ".")
-
-                if parts.count == 2 {
-                    longitudeDegrees = String(parts[0])
-                    longitudeMinutes = String(parts[1])
-                }
-                
-                let coordinatesString = latitudeDegrees + "\u{00B0}" + latitudeMinutes + "\u{2032}, " + longitudeDegrees + "\u{00B0}" + longitudeMinutes + "\u{2032}"
-                countryDetailsVC.coordinatesNameLabel.text = coordinatesString
-            } else {
+            if let capital = countryData.capital.first{
+                if let latlng = countryData.capitalInfo.latlng {
+                    let latitude = latlng[0]
+                    let longitude = latlng[1]
+                    
+                    var latitudeDegrees = ""
+                    var latitudeMinutes = ""
+                    var longitudeDegrees = ""
+                    var longitudeMinutes = ""
+                    
+                    var numberString = String(latitude)
+                    var parts = numberString.split(separator: ".")
+                    
+                    if parts.count == 2 {
+                        latitudeDegrees = String(parts[0])
+                        latitudeMinutes = String(parts[1])
+                    }
+                    
+                    numberString = String(longitude)
+                    parts = numberString.split(separator: ".")
+                    
+                    if parts.count == 2 {
+                        longitudeDegrees = String(parts[0])
+                        longitudeMinutes = String(parts[1])
+                    }
+                    
+                    let coordinatesString = latitudeDegrees + "\u{00B0}" + latitudeMinutes + "\u{2032}, " + longitudeDegrees + "\u{00B0}" + longitudeMinutes + "\u{2032}"
+                    countryDetailsVC.coordinatesNameLabel.text = coordinatesString
+                } 
+            }
+            else{
                 countryDetailsVC.coordinatesNameLabel.text = "No data about coordinates"
             }
             
