@@ -320,9 +320,12 @@ class CustomExpandedTableViewCell: UITableViewCell {
         }
         
         learnMoreButton.snp.makeConstraints { make in
-            make.top.equalTo(currenciesLabel.snp.bottom).offset(26)
+            make.top.equalTo(currenciesLabel.snp.bottom).offset(12)
             make.centerX.equalTo(contentWhiteView)
-            make.bottom.equalTo(contentWhiteView).offset(-26)
+            make.height.equalTo(50)
+            make.leading.equalTo(contentWhiteView).offset(16)
+            make.trailing.equalTo(contentWhiteView).offset(-16)
+            make.bottom.equalTo(contentWhiteView).offset(-12)
         }
     }
     
