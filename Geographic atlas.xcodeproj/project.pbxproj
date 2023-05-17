@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5405BB332A14A32E00330011 /* Assets.xcassets 00-25-15-390.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5405BB322A14A32E00330011 /* Assets.xcassets 00-25-15-390.xcassets */; };
 		542E4AF02A124DD10054C518 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 542E4AEF2A124DD10054C518 /* SnapKit */; };
 		542E4AF22A1399220054C518 /* UIColorExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542E4AF12A1399220054C518 /* UIColorExtention.swift */; };
 		5470443C2A0DF42800C262F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5470443B2A0DF42800C262F5 /* AppDelegate.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5405BB322A14A32E00330011 /* Assets.xcassets 00-25-15-390.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets 00-25-15-390.xcassets"; sourceTree = "<group>"; };
 		542E4AF12A1399220054C518 /* UIColorExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtention.swift; sourceTree = "<group>"; };
 		547044382A0DF42800C262F5 /* Geographic atlas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Geographic atlas.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5470443B2A0DF42800C262F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				5470444F2A0DF56900C262F5 /* NavigationController.swift */,
 				547044462A0DF42A00C262F5 /* LaunchScreen.storyboard */,
 				547044492A0DF42A00C262F5 /* Info.plist */,
+				5405BB322A14A32E00330011 /* Assets.xcassets 00-25-15-390.xcassets */,
 				547044512A0E267100C262F5 /* CountryData.swift */,
 				547044532A0E275C00C262F5 /* APIManager.swift */,
 				54ED6C8D2A0E3CCC005E8D6A /* DataManager.swift */,
@@ -167,6 +170,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5405BB332A14A32E00330011 /* Assets.xcassets 00-25-15-390.xcassets in Resources */,
 				547044482A0DF42A00C262F5 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

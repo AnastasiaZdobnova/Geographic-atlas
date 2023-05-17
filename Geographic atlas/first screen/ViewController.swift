@@ -113,7 +113,8 @@ extension ViewController: UITableViewDelegate{
             // Выбрана новая ячейка, добавляем индекс в массив
             selectedIndexes.append(indexPath)
         }
-        tableView.reloadData()
+        //tableView.reloadData()
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
 }
