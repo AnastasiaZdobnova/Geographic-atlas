@@ -32,7 +32,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
     
     var countryNameLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 17)
+        lable.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.semibold)
         lable.textColor = UIColor.textAccentColor
         return lable
     }()
@@ -47,7 +47,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
     
     let capitalLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Regular", size: 13)
+        lable.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAdditionalColor
         return lable
     }()
@@ -55,14 +55,14 @@ class CustomExpandedTableViewCell: UITableViewCell {
     let populationLabelBeginning: UILabel = {
         let label = UILabel()
         label.text = "Population:"
-        label.font = UIFont(name: "SFProText-Regular", size: 13)
+        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
         label.textColor = UIColor.textAdditionalColor
         return label
     }()
     
     let populationLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "SFProText-Regular", size: 13)
+        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
         label.textColor = UIColor.textAccentColor
         return label
     }()
@@ -70,21 +70,21 @@ class CustomExpandedTableViewCell: UITableViewCell {
     let areaLabelBeginning: UILabel = {
         let label = UILabel()
         label.text = "Area:"
-        label.font = UIFont(name: "SFProText-Regular", size: 13)
+        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
         label.textColor = UIColor.textAdditionalColor
         return label
     }()
     
     let areaLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "SFProText-Regular", size: 13)
+        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
         label.textColor = UIColor.textAccentColor
         return label
     }()
     
     let currenciesLabelBeginning: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "SFProText-Regular", size: 13)
+        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
         label.textColor = UIColor.textAdditionalColor
         label.text = "Currencies: "
         return label
@@ -92,7 +92,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
     
     let currenciesLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "SFProText-Regular", size: 13)
+        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
         label.textColor = UIColor.textAccentColor
         return label
     }()
@@ -102,8 +102,10 @@ class CustomExpandedTableViewCell: UITableViewCell {
     let learnMoreButton: UIButton = {
         let button = UIButton()
         button.setTitle("Learn more", for: .normal)
+        
         button.addTarget(self, action: #selector(learnMoreButtonTapped), for: .touchUpInside)
         button.setTitleColor(UIColor.learnMoreButtonColor, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.semibold)
         return button
     }()
     
@@ -196,14 +198,26 @@ class CustomExpandedTableViewCell: UITableViewCell {
                     return "\(currency.value.name) (\(currency.value.symbol ?? "")) (\(currencyCode))"
                 }
                 let allCurrenciesString = currencyStrings.joined(separator: "\n")
-                countryDetailsVC.currencyNameLabel.text = allCurrenciesString
+                
+                let attributedString = NSMutableAttributedString(string: allCurrenciesString)
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.lineSpacing = 4 // Задание межстрочного интервала в 4 поинта
+                attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
+                
+                countryDetailsVC.currencyNameLabel.attributedText = attributedString
             } else {
                 // У страны нет валют
                 countryDetailsVC.currencyNameLabel.text = "The country has no currency"
             }
+
             
             let timezonesString = countryData.timezones.joined(separator: "\n")
-            countryDetailsVC.timezonesNameLabel.text = timezonesString
+            let attributedString = NSMutableAttributedString(string: timezonesString)
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.lineSpacing = 4 // Задание межстрочного интервала в 4 поинта
+                attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
+                
+            countryDetailsVC.timezonesNameLabel.attributedText = attributedString
             
         }
         

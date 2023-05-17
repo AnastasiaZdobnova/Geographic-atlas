@@ -16,7 +16,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        for family in UIFont.familyNames {
+            print("Font Family: \(family)")
+            for fontName in UIFont.fontNames(forFamilyName: family) {
+                print("    \(fontName)")
+            }
+        }
         view.backgroundColor = UIColor.viewColor
         
         self.navigationController?.navigationBar.backgroundColor = UIColor.navigationBarColor
@@ -78,10 +83,17 @@ extension ViewController: UITableViewDelegate{
         let titleLabel = UILabel()
         titleLabel.font = UIFont(name: "SFProText-Bold", size: 15)
         titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        //titleLabel.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.bold)
         titleLabel.textColor = UIColor.headerInSection
         titleLabel.text = DataManager.uniqueRegions[section].uppercased()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(titleLabel)
+        // Создание атрибутированной строки с межбуквенным интервалом
+        let attributedString = NSMutableAttributedString(string: titleLabel.text ?? "")
+        let letterSpacing: CGFloat = 1.2
+        attributedString.addAttribute(.kern, value: letterSpacing, range: NSRange(location: 0, length: attributedString.length))
+
+        // Установка атрибутированной строки в качестве текста для titleLabel
+        titleLabel.attributedText = attributedString
         
         titleLabel.snp.makeConstraints { make in
             make.leading.equalTo(headerView).offset(16)

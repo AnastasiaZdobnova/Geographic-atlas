@@ -33,7 +33,7 @@ class CustomTableViewCell: UITableViewCell {
     
     var countryNameLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 17)
+        lable.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.semibold)
         lable.textColor = UIColor.textAccentColor
         return lable
     }()
@@ -48,7 +48,7 @@ class CustomTableViewCell: UITableViewCell {
     
     let capitalLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Regular", size: 13)
+        lable.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAdditionalColor
         return lable
     }()

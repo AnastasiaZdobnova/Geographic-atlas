@@ -15,8 +15,6 @@ class CountryDetailsViewController: UIViewController {
         view.backgroundColor = UIColor.viewColor
         self.navigationController?.navigationBar.backgroundColor = UIColor.viewColor
     
-       
-        
         layout()
         // Do any additional setup after loading the view.
     }
@@ -51,7 +49,7 @@ class CountryDetailsViewController: UIViewController {
     
     var regionLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 15)
+        lable.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAdditionalColor
         lable.text = "Region:"
         return lable
@@ -60,7 +58,7 @@ class CountryDetailsViewController: UIViewController {
     
     var regionNameLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 30)
+        lable.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAccentColor
         return lable
     }()
@@ -74,7 +72,7 @@ class CountryDetailsViewController: UIViewController {
     
     let capitalLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 15)
+        lable.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAdditionalColor
         lable.text = "Capital:"
         return lable
@@ -82,7 +80,7 @@ class CountryDetailsViewController: UIViewController {
     
     let capitalNameLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 30)
+        lable.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAccentColor
         return lable
     }()
@@ -97,7 +95,7 @@ class CountryDetailsViewController: UIViewController {
     
     let coordinatesLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 15)
+        lable.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAdditionalColor
         lable.text = "Сoordinates:"
         return lable
@@ -105,7 +103,7 @@ class CountryDetailsViewController: UIViewController {
     
     let coordinatesNameLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 30)
+        lable.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAccentColor
         return lable
     }()
@@ -119,7 +117,7 @@ class CountryDetailsViewController: UIViewController {
     
     let populationLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 15)
+        lable.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAdditionalColor
         lable.text = "Population:"
         return lable
@@ -127,7 +125,7 @@ class CountryDetailsViewController: UIViewController {
     
     let populationNameLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 30)
+        lable.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAccentColor
         return lable
     }()
@@ -141,7 +139,7 @@ class CountryDetailsViewController: UIViewController {
     
     let areaLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 15)
+        lable.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAdditionalColor
         lable.text = "Area:"
         return lable
@@ -149,7 +147,7 @@ class CountryDetailsViewController: UIViewController {
     
     let areaNameLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 30)
+        lable.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAccentColor
         return lable
     }()
@@ -163,7 +161,7 @@ class CountryDetailsViewController: UIViewController {
     
     let currencyLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 15)
+        lable.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAdditionalColor
         lable.text = "Currency:"
         return lable
@@ -171,7 +169,7 @@ class CountryDetailsViewController: UIViewController {
     
     let currencyNameLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 30)
+        lable.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAccentColor
         lable.numberOfLines = 0
         return lable
@@ -186,7 +184,7 @@ class CountryDetailsViewController: UIViewController {
     
     let timezonesLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 15)
+        lable.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAdditionalColor
         lable.text = "Timezones:"
         return lable
@@ -194,7 +192,7 @@ class CountryDetailsViewController: UIViewController {
     
     let timezonesNameLabel: UILabel = {
         let lable = UILabel()
-        lable.font = UIFont(name: "SFProText-Bold", size: 30)
+        lable.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
         lable.textColor = UIColor.textAccentColor
         lable.numberOfLines = 0
         return lable
