@@ -12,18 +12,20 @@ import UIKit
 class APIManager {
     
     static let shared = APIManager()
-    let urlString = "https://restcountries.com/v3.1/all"
+    //let urlString = "https://restcountries.com/v3.1/all"
+    let urlString = "https://restcountries.com/v3.1/all?fields=name,cca2,currencies,capital,region,area,flag,maps,population,timezones,flags,capitalInfo"
     var completionHandler: (() -> Void)?
     
-    var countryData: [CountryDatum] = [] // Добавленное свойство для хранения данных стран
-    
+    //var countryData: [CountryDatum] = [] // Добавленное свойство для хранения данных стран
+    var countryData: [CountryDatum2] = [] // Добавленное свойство для хранения данных стран
     func getData() {
         let url = URL(string: urlString)
         var request = URLRequest(url: url!)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else { return }
-            if let countryData = try? JSONDecoder().decode([CountryDatum].self, from: data) {
+//            if let countryData = try? JSONDecoder().decode([CountryDatum].self, from: data) {
+            if let countryData = try? JSONDecoder().decode([CountryDatum2].self, from: data) {
                 print("Success decoding")
                 
                 self.countryData = countryData // Сохраняем данные стран в свойство countryData
