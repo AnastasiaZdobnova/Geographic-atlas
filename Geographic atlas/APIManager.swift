@@ -51,51 +51,24 @@ class APIManager {
     }
     
     func getDataFull(urlString: String) {
-        print("getDataFull func))))))))))))))")
-        print(urlString)
         let url = URL(string: urlString)
         let request = URLRequest(url: url!)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else { return }
             if let countryData = try? JSONDecoder().decode([CountryDatum].self, from: data) {
-                print("Success decoding getDataFull)))))))))))")
+                print("Success decoding")
                 
                 DispatchQueue.main.async {
                     self.completionHandler?()
                 }
                 self.countryDataFull = countryData
-                print("передались данные")
             } else {
-                print("Fail decoding getDataFull))))))))))))")
+                print("Fail decoding")
             }
         }
         
         task.resume()
     }
-    
-//    func getFlag(flags: String, completion: @escaping (UIImage?) -> Void) {
-//        guard let url = URL(string: flags) else {
-//            completion(nil)
-//            return
-//        }
-//        
-//        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-//            if let error = error {
-//                print("Error: \(error)")
-//                completion(nil)
-//                return
-//            }
-//            
-//            guard let data = data, let image = UIImage(data: data) else {
-//                completion(nil)
-//                return
-//            }
-//            
-//            completion(image)
-//        }
-//        
-//        task.resume()
-//    }
 }
 

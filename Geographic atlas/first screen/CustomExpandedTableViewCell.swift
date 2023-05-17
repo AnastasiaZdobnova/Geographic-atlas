@@ -131,13 +131,13 @@ class CustomExpandedTableViewCell: UITableViewCell {
             
             let cca2 = countryData.cca2
             let countryURLString = "https://restcountries.com/v3.1/alpha/\(cca2)"
-            print(countryURLString)
+            
             
             
             
             APIManager.shared.completionHandler = { [weak self] in
                 let countryDataFull = APIManager.shared.countryDataFull.first
-                print("вот данные \(countryDataFull)")
+                
                 
                 countryDetailsVC.flagsImageView.image = UIImage(data: try! Data(contentsOf: URL(string: countryDataFull!.flags.png)!))
                 
@@ -233,12 +233,13 @@ class CustomExpandedTableViewCell: UITableViewCell {
                 attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
 
                 countryDetailsVC.timezonesNameLabel.attributedText = attributedString
+                self?.navigationController?.pushViewController(countryDetailsVC, animated: true)
                 
             }
             APIManager.shared.getDataFull(urlString: countryURLString)
         }
         
-        navigationController?.pushViewController(countryDetailsVC, animated: true)
+//        navigationController?.pushViewController(countryDetailsVC, animated: true)
     }
     //MARK: -  override init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -270,7 +271,7 @@ class CustomExpandedTableViewCell: UITableViewCell {
         }
         
         countryNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(flagsImageView)
+            make.top.equalTo(flagsImageView).offset(4)
             make.leading.equalTo(flagsImageView.snp.trailing).offset(16)
         }
         

@@ -88,7 +88,7 @@ class CustomTableViewCell: UITableViewCell {
         }
         
         countryNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(flagsImageView)
+            make.top.equalTo(flagsImageView).offset(4)
             make.leading.equalTo(flagsImageView.snp.trailing).offset(16)
         }
         

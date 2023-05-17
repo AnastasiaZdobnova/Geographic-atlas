@@ -123,9 +123,7 @@ extension ViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let region = DataManager.uniqueRegions[section]
-        print("Вот такой у меня region - \(region)")
         let countries = DataManager.shared.getCountriesInRegion(region)
-        print("Вот столько у меня должно быть ячеек - \(countries.count)")
         return countries.count
     }
     
@@ -174,7 +172,7 @@ extension ViewController: UITableViewDataSource{
                 else {
                     cell.populationLabel.text = String(countryData.population) + " people"
                 }
-            
+                
                 if let currencies = countryData.currencies {
                     // У страны есть валюты
                     
@@ -185,7 +183,7 @@ extension ViewController: UITableViewDataSource{
                         
                     } else if let (currencyCode, currency) = currencies.first {
                         let currencyString = "\(currency.name) (\(currency.symbol ?? "")) (\(currencyCode))"
-                                print(currencyString)
+                        
                         cell.currenciesLabel.text = currencyString
                     }
                 } else {
