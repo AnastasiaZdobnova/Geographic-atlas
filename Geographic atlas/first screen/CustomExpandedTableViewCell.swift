@@ -121,7 +121,22 @@ class CustomExpandedTableViewCell: UITableViewCell {
         
     }
     //MARK: -  learnMoreButtonTapped()
-    @objc func learnMoreButtonTapped() {
+    @objc func learnMoreButtonTapped(_ sender: UIButton) {
+        
+        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            
+            // Анимированное изменение масштаба кнопки с использованием пружинной анимации
+            UIView.animate(withDuration: 0.5,
+                           delay: 0,
+                           usingSpringWithDamping: 0.8,
+                           initialSpringVelocity: 0.5,
+                           options: .curveEaseInOut,
+                           animations: {
+                               // Устанавливаем конечный масштаб кнопки
+                               sender.transform = CGAffineTransform.identity
+                           },
+                           completion: nil)
+        
         // Создать экземпляр CountryDetailsViewController и передать необходимые данные
         let countryDetailsVC = CountryDetailsViewController()
         // Настройте CountryDetailsViewController с использованием переданных данных
