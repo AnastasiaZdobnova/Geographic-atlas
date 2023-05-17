@@ -48,19 +48,19 @@ class CountryDetailsViewController: UIViewController {
     }()
     
     var regionLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAdditionalColor
-        lable.text = "Region:"
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAdditionalColor
+        label.text = "Region:"
+        return label
     }()
     
     
     var regionNameLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAccentColor
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAccentColor
+        return label
     }()
     
     var capitalDot: UIView = {
@@ -71,18 +71,18 @@ class CountryDetailsViewController: UIViewController {
     }()
     
     let capitalLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAdditionalColor
-        lable.text = "Capital:"
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAdditionalColor
+        label.text = "Capital:"
+        return label
     }()
     
     let capitalNameLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAccentColor
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAccentColor
+        return label
     }()
     
     
@@ -94,18 +94,18 @@ class CountryDetailsViewController: UIViewController {
     }()
     
     let coordinatesLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAdditionalColor
-        lable.text = "Сoordinates:"
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAdditionalColor
+        label.text = "Сoordinates:"
+        return label
     }()
     
     let coordinatesNameLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAccentColor
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAccentColor
+        return label
     }()
     
     var populationDot: UIView = {
@@ -116,18 +116,18 @@ class CountryDetailsViewController: UIViewController {
     }()
     
     let populationLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAdditionalColor
-        lable.text = "Population:"
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAdditionalColor
+        label.text = "Population:"
+        return label
     }()
     
     let populationNameLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAccentColor
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAccentColor
+        return label
     }()
     
     var areaDot: UIView = {
@@ -138,18 +138,18 @@ class CountryDetailsViewController: UIViewController {
     }()
     
     let areaLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAdditionalColor
-        lable.text = "Area:"
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAdditionalColor
+        label.text = "Area:"
+        return label
     }()
     
     let areaNameLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAccentColor
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAccentColor
+        return label
     }()
     
     var currencyDot: UIView = {
@@ -160,19 +160,19 @@ class CountryDetailsViewController: UIViewController {
     }()
     
     let currencyLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAdditionalColor
-        lable.text = "Currency:"
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAdditionalColor
+        label.text = "Currency:"
+        return label
     }()
     
     let currencyNameLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAccentColor
-        lable.numberOfLines = 0
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAccentColor
+        label.numberOfLines = 0
+        return label
     }()
     
     var timezonesDot: UIView = {
@@ -183,19 +183,19 @@ class CountryDetailsViewController: UIViewController {
     }()
     
     let timezonesLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAdditionalColor
-        lable.text = "Timezones:"
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAdditionalColor
+        label.text = "Timezones:"
+        return label
     }()
     
     let timezonesNameLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAccentColor
-        lable.numberOfLines = 0
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAccentColor
+        label.numberOfLines = 0
+        return label
     }()
     
     

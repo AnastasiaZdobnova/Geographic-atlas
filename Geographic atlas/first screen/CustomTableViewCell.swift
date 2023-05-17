@@ -32,10 +32,10 @@ class CustomTableViewCell: UITableViewCell {
     }()
     
     var countryNameLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.semibold)
-        lable.textColor = UIColor.textAccentColor
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.semibold)
+        label.textColor = UIColor.textAccentColor
+        return label
     }()
     
     let chevronDownLabel : UIImageView = {
@@ -47,10 +47,10 @@ class CustomTableViewCell: UITableViewCell {
     }()
     
     let capitalLabel: UILabel = {
-        let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
-        lable.textColor = UIColor.textAdditionalColor
-        return lable
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
+        label.textColor = UIColor.textAdditionalColor
+        return label
     }()
     
     override func prepareForReuse() {
